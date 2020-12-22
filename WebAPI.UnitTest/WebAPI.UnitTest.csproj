@@ -64,10 +64,6 @@
       <Project>{63c5a436-5e2b-439e-8c03-28f3de55faf4}</Project>
       <Name>WebAPI.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj">
-      <Project>{16b6dd74-ec64-441b-91f9-912dbe6e5980}</Project>
-      <Name>WebAPI.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WebAPI.Service\WebAPI.Service.csproj">
       <Project>{8426e37b-a6a6-4054-a984-442623789016}</Project>
       <Name>WebAPI.Service</Name>
