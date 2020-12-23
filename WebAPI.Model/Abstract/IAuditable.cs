@@ -2,6 +2,9 @@
 
 namespace WebAPI.Model.Abstract
 {
+    /// <summary>
+    /// kế thừa
+    /// </summary>
     public interface IAuditable
     {
         DateTime? CreatedDate { set; get; }

@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Model.Abstract
 {
+    /// <summary>
+    /// kế thừa dùng cho SEO
+    /// </summary>
     public abstract class Auditable : IAuditable
     {
         public DateTime? CreatedDate { set; get; }
