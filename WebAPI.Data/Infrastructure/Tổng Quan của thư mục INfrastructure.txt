@@ -1,0 +1,6 @@
+﻿Các class và interface trong Infrastructure có nhiệm vụ như sau: (giải thích nôm na)
+
+khi Disposable kế thừa từ IDisposable có sẵn có thể tự tắt đối tượng khi không dùng đến
+DbFactory để khởi tạo DbContext thay vì new trực tiếp thì ta có thể thông qua DbFactory
+RepositoryBase dùng để thực thi toàn bộ các Phương thức được định nghĩa trong IRepository
+Unit Of Work có nhiệm vụ Commit tất cả vào database
