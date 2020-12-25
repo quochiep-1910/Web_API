@@ -28,9 +28,9 @@ namespace WebAPI.Service
 
     public class PostService : IPostService
     {
-        private IPostRepository _postRepository;
+        IPostRepository _postRepository;
 
-        private IUnitOfWork _unitOfWork;
+        IUnitOfWork _unitOfWork;
 
         public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork)
         {

@@ -7,11 +7,11 @@ namespace WebAPI.Service
 {
     public interface IPostCategoryService
     {
-        void Add(PostCategory postCategory);
+        PostCategory Add(PostCategory postCategory);
 
         void Update(PostCategory postCategory);
 
-        void Delete(int id);
+        PostCategory Delete(int id);
 
         IEnumerable<PostCategory> GetAll();
 
@@ -22,9 +22,9 @@ namespace WebAPI.Service
 
     public class PostCategoryService : IPostCategoryService
     {
-        private IPostCategoryRepository _postCategoryRepository;
+        IPostCategoryRepository _postCategoryRepository;
 
-        private IUnitOfWork _unitOfWork;
+        IUnitOfWork _unitOfWork;
 
         public PostCategoryService(IPostCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
         {
@@ -32,15 +32,15 @@ namespace WebAPI.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public void Add(PostCategory postCategory)
+        public PostCategory Add(PostCategory postCategory)
 
         {
-            _postCategoryRepository.Add(postCategory);
+            return _postCategoryRepository.Add(postCategory);
         }
 
-        public void Delete(int id)
+        public PostCategory Delete(int id)
         {
-            _postCategoryRepository.Delete(id);
+            return _postCategoryRepository.Delete(id);
         }
 
         public IEnumerable<PostCategory> GetAll()
@@ -60,7 +60,7 @@ namespace WebAPI.Service
 
         public void Update(PostCategory postCategory)
         {
-            _unitOfWork.Commit();
+            _postCategoryRepository.Update(postCategory);
         }
     }
 }
