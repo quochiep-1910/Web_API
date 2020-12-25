@@ -8,7 +8,7 @@ namespace WebAPI.Data.Repositories
     /// <summary>
     /// Phương thức tự định nghĩa
     /// </summary>
-    public interface IProductCategoryRepository
+    public interface IProductCategoryRepository : IRepository<ProductCategory>
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);
     }

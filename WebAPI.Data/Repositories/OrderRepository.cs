@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-using WebAPI.Data.Infrastructure;
+﻿using WebAPI.Data.Infrastructure;
 using WebAPI.Model.Models;
 
 namespace WebAPI.Data.Repositories
