@@ -1,41 +1,112 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using WebAPI.Model.Models;
 using WebAPI.Service;
 using WebAPI.Web.Infrastructure.Core;
 
 namespace WebAPI.Web.API
 {
+    [RoutePrefix("api/postcategory")]
     public class PostCategoryController : ApiControllerBase
     {
-        public PostCategoryController(IErrorService errorService) : base(errorService)
+        private IPostCategoryService _postCategoryService;
+
+        public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) : base(errorService)
         {
+            this._postCategoryService = postCategoryService;
         }
 
-        // GET: api/PostCategory
-        public IEnumerable<string> Get()
+        [Route("getall")]
+        public HttpResponseMessage Get(HttpRequestMessage request)
         {
-            return new string[] { "value1", "value2" };
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    //xuất ra lỗi
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else //nếu thành công thì thêm đối tượng
+                {
+                    var listCategory = _postCategoryService.GetAll();
+                    _postCategoryService.Save();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, listCategory);
+                }
+                return response;
+            });
         }
 
-        // GET: api/PostCategory/5
-        public string Get(int id)
+        /// <summary>
+        /// Tạo ra đối tượng postCategory
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="postCategory"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategory postCategory)
         {
-            return "value";
+            return CreateHttpResponse(request, () =>
+             {
+                 HttpResponseMessage response = null;
+                 if (ModelState.IsValid)
+                 {
+                     //xuất ra lỗi
+                     request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                 }
+                 else //nếu thành công thì thêm đối tượng
+                 {
+                     var category = _postCategoryService.Add(postCategory);
+                     _postCategoryService.Save();
+
+                     response = request.CreateResponse(HttpStatusCode.Created, category);
+                 }
+                 return response;
+             });
         }
 
-        // POST: api/PostCategory
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
         {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    //xuất ra lỗi
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else //nếu thành công thì thêm đối tượng
+                {
+                    _postCategoryService.Update(postCategory);
+                    _postCategoryService.Save();
+
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
         }
 
-        // PUT: api/PostCategory/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
-        }
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    //xuất ra lỗi
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else //nếu thành công thì thêm đối tượng
+                {
+                    _postCategoryService.Delete(id);
+                    _postCategoryService.Save();
 
-        // DELETE: api/PostCategory/5
-        public void Delete(int id)
-        {
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
         }
     }
 }
