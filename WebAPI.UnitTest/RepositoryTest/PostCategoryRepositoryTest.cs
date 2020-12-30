@@ -40,7 +40,7 @@ namespace WebAPI.UnitTest.RepositoryTest
             unitOfWork.Commit();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(10, result.ID);
+            Assert.AreEqual(2, result.ID);
         }
     }
 }

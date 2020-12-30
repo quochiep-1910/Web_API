@@ -23,19 +23,10 @@ namespace WebAPI.Web.API
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
-                if (ModelState.IsValid)
-                {
-                    //xuất ra lỗi
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else //nếu thành công thì thêm đối tượng
-                {
-                    var listCategory = _postCategoryService.GetAll();
-                    _postCategoryService.Save();
+                var listCategory = _postCategoryService.GetAll();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listCategory);
-                }
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
+
                 return response;
             });
         }
