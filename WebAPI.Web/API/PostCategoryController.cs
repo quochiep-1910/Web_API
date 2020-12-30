@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Model.Models;
 using WebAPI.Service;
 using WebAPI.Web.Infrastructure.Core;
+using WebAPI.Web.Infrastructure.Extensions;
+using WebAPI.Web.Models;
 
 namespace WebAPI.Web.API
 {
@@ -24,8 +27,9 @@ namespace WebAPI.Web.API
             return CreateHttpResponse(request, () =>
             {
                 var listCategory = _postCategoryService.GetAll();
+                var listPostCategoryViewModel = Mapper.Map<List<PostCategoryViewModel>>(listCategory);
 
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listPostCategoryViewModel);
 
                 return response;
             });
@@ -37,7 +41,8 @@ namespace WebAPI.Web.API
         /// <param name="request"></param>
         /// <param name="postCategory"></param>
         /// <returns></returns>
-        public HttpResponseMessage Post(HttpRequestMessage request, PostCategory postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryViewModel)
         {
             return CreateHttpResponse(request, () =>
              {
@@ -49,7 +54,10 @@ namespace WebAPI.Web.API
                  }
                  else //nếu thành công thì thêm đối tượng
                  {
-                     var category = _postCategoryService.Add(postCategory);
+                     PostCategory newPostCategory = new PostCategory(); //tạo 1 đối tượng PostCategory
+                     newPostCategory.UpdatePostCategory(postCategoryViewModel); //copy tất cả giá trị của postCategoryViewModel sang newPostCategory
+
+                     var category = _postCategoryService.Add(newPostCategory);
                      _postCategoryService.Save();
 
                      response = request.CreateResponse(HttpStatusCode.Created, category);
@@ -58,7 +66,8 @@ namespace WebAPI.Web.API
              });
         }
 
-        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryViewModel)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -70,7 +79,10 @@ namespace WebAPI.Web.API
                 }
                 else //nếu thành công thì thêm đối tượng
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryViewModel.ID);
+                    postCategoryDb.UpdatePostCategory(postCategoryViewModel);
+
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
