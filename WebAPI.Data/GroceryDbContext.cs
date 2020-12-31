@@ -1,9 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using WebAPI.Model.Models;
 
 namespace WebAPI.Data
 {
-    public class GroceryDbContext : DbContext
+    public class GroceryDbContext : IdentityDbContext<ApplicationUser>
     {
         public GroceryDbContext() : base("GroceryStoreConnection")
         {
@@ -33,16 +34,25 @@ namespace WebAPI.Data
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
         public DbSet<Error> Errors { set; get; }
 
+        public static GroceryDbContext Create()
+        {
+            return new GroceryDbContext();
+        }
+
         /// <summary>
         /// Ghi đè DbContext
         /// </summary>
         /// <param name="builder"></param>
         protected override void OnModelCreating(DbModelBuilder builder)
         {
+            //thêm key cho entity
             //builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
             //builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
             //builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
             //builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
+
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
         }
     }
 }
