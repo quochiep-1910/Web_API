@@ -27,7 +27,9 @@ namespace WebAPI.Web.Infrastructure.Core
             HttpResponseMessage response = null;
             try
             {
-                response = function.Invoke();
+                response = function.Invoke(); //Invoke: Cho phép sử dụng thread(luồng) từ main-thread để xử lý
+                                              //tránh trường hợp bị crash or unsafe bất cứ lúc nào khi các thread tranh chấp tài nguyên
+                                              //Còn gọi là uỷ quyền *Delegate
             }
             catch (DbEntityValidationException ex)//Ngoại lệ xác thực thực thể
             {
