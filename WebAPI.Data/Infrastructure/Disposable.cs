@@ -16,7 +16,7 @@ namespace WebAPI.Data.Infrastructure
         }
 
         /// <summary>
-        /// Thu hồi bộ nhớ
+        /// Thu hồi bộ nhớ khi sử dụng xog tránh bị tràn
         /// </summary>
         public void Dispose()
         {
