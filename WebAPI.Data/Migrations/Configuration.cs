@@ -3,6 +3,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebAPI.Model.Models;
@@ -21,33 +22,51 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            CreateProductCategorySample(context);
 
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new GroceryDbContext()));
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new GroceryDbContext()));
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new GroceryDbContext()));
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new GroceryDbContext()));
 
-            var user = new ApplicationUser()
+            //var user = new ApplicationUser()
+            //{
+            //    UserName = "Grocery",
+            //    Email = "hiepgakute1111@gmail.com",
+            //    EmailConfirmed = true,
+            //    BirthDay = DateTime.Now,
+            //    FullName = "Nguyen Quoc Hiep"
+            //};
+            ////password User
+            //manager.Create(user, "quochieps@2");
+
+            ////nếu role chưa tồn tại thì tạo 2 role Admin và user
+            //if (!roleManager.Roles.Any())
+            //{
+            //    roleManager.Create(new IdentityRole { Name = "Admin" });
+            //    roleManager.Create(new IdentityRole { Name = "User" });
+            //}
+
+            ////tìm user admin thông qua Email
+            //var adminUser = manager.FindByEmail("hiepgakute1111@gmail.com");
+
+            ////nếu thành công thì có giá trị và add admin và user
+            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+        }
+
+        private void CreateProductCategorySample(WebAPI.Data.GroceryDbContext context)
+        {
+            if (context.ProductCategories.Count() == 0)
             {
-                UserName = "Grocery",
-                Email = "hiepgakute1111@gmail.com",
-                EmailConfirmed = true,
-                BirthDay = DateTime.Now,
-                FullName = "Nguyen Quoc Hiep"
-            };
-            //password User
-            manager.Create(user, "quochieps@2");
-
-            //nếu role chưa tồn tại thì tạo 2 role Admin và user
-            if (!roleManager.Roles.Any())
-            {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
+                List<ProductCategory> listProductCategory = new List<ProductCategory>()
+                {
+                    new ProductCategory() { Name = "Thực Phẩm", Alias = "thuc-pham", Status = true },
+                    new ProductCategory() { Name = "Gia dụng", Alias = "gia-dung", Status = true },
+                    new ProductCategory() { Name = "Thức Ăn", Alias = "thuc-an", Status = true },
+                    new ProductCategory() { Name = "Đồ chơi", Alias = "do-choi", Status = true },
+                    new ProductCategory() { Name = "Mỹ Phẩm", Alias = "my-pham", Status = false }
+                };
+                context.ProductCategories.AddRange(listProductCategory);
+                context.SaveChanges();
             }
-
-            //tìm user admin thông qua Email
-            var adminUser = manager.FindByEmail("hiepgakute1111@gmail.com");
-
-            //nếu thành công thì có giá trị và add admin và user
-            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
     }
 }
