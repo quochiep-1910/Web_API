@@ -1,6 +1,6 @@
 ﻿(function (app) {
-    app.controller('homeController', homeController);
+    app.controller('productListController', productListController);
 
-    function homeController() {
+    function productListController() {
     }
 })(angular.module('grocery.products'));

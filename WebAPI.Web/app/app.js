@@ -1,7 +1,8 @@
 ﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('grocery', ['grocery.products', 'grocery.common']).config(config);
+    angular.module('grocery', ['grocery.products', 'grocery.common',
+        'grocery.product_categories',]).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'] //tiêm thuộc tính có sẵn trong angular
     function config($stateProvider, $urlRouterProvider) {

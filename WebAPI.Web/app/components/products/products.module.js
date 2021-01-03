@@ -1,4 +1,4 @@
-﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
+﻿/// <reference path="../../../assets/admin/libs/angular/angular.js" />
 
 (function () {
     angular.module('grocery.products', ['grocery.common']).config(config);
@@ -10,9 +10,9 @@
             templateUrl: "/app/components/products/productListView.html",
             controller: "productListController"
         }).state('product_add', { //khai báo cho đường dẫn admin và dùng controller
-            url: "/product_add",
+            url: "/product_add", //trỏ tới url này thì nó chuyển vào view html bên dưới
             templateUrl: "/app/components/products/productAddView.html",
-            controller: "productAddController"
+            controller: "productAddController" //nó tự chạy js controller này
         });
     }
 })();
