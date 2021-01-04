@@ -1,10 +1,70 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    <h1>Product category</h1>
-</body>
-</html>
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Category</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh mục sản phẩm</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">ID</th>
+                            <th style="width: 50%">Tên Danh mục</th>
+                            <th style="width: 20%">Ngày tạo</th>
+                            <th style="width: 10%">Trạng Thái</th>
+                            <th style="width: 15%">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in productCategories">
+                            <td>{{item.ID}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>
+                                {{item.CreatedDate | date: 'dd/MM/yyyy hh:mm:ss'}}
+                            </td>
+                            <!---->
+                            <td>
+                                <span ng-class="{'badge bg-red':item.Status == false,'badge bg-green':item.Status == true}">
+                                    {{item.Status | statusFilter}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
