@@ -228,9 +228,12 @@
     <Content Include="app\components\product_categories\producteCategoryListController.js" />
     <Content Include="app\components\ReadMe.txt" />
     <Content Include="app\Readme.txt" />
+    <Content Include="app\shared\directives\pagerDirective.html" />
+    <Content Include="app\shared\directives\pagerDiretive.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\modules\grocery.common.js" />
     <Content Include="app\shared\services\apiService.js" />
+    <Content Include="app\shared\services\notificationService.js" />
     <Content Include="Assets\admin\css\adminlte.css" />
     <Content Include="Assets\admin\css\adminlte.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.components.css" />
@@ -805,6 +808,10 @@
     <Content Include="Assets\admin\libs\jQuery\test\unit\tween.js" />
     <Content Include="Assets\admin\libs\jQuery\test\unit\wrap.js" />
     <Content Include="Assets\admin\libs\jQuery\test\xhtml.php" />
+    <Content Include="Assets\admin\libs\toastr\toastr.css" />
+    <Content Include="Assets\admin\libs\toastr\toastr.js" />
+    <Content Include="Assets\admin\libs\toastr\toastr.min.css" />
+    <Content Include="Assets\admin\libs\toastr\toastr.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1187,6 +1194,13 @@
     <Content Include="Assets\admin\libs\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Assets\admin\libs\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Assets\admin\libs\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Assets\admin\libs\toastr\.bower.json" />
+    <Content Include="Assets\admin\libs\toastr\bower.json" />
+    <Content Include="Assets\admin\libs\toastr\LICENSE" />
+    <Content Include="Assets\admin\libs\toastr\README.md" />
+    <Content Include="Assets\admin\libs\toastr\toastr.js.map" />
+    <Content Include="Assets\admin\libs\toastr\toastr.less" />
+    <Content Include="Assets\admin\libs\toastr\toastr.scss" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

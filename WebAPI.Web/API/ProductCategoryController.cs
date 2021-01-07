@@ -24,14 +24,14 @@ namespace WebAPI.Web.API
         }
 
         [Route("getall")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize = 20)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
              {
                  int totalRow = 0;
-                 var model = _productCategoryService.GetAll();
+                 var model = _productCategoryService.GetAll(keyword);//lấy về toàn bộ số bản ghi và từ khoá tìm kiếm
 
-                 totalRow = model.Count(); //lấy về toàn bộ số bản ghi
+                 totalRow = model.Count(); //đếm
                  var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
                  var reponseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query); //lấy giữ liệu thông qua mapper và duyệt từng phần từ
 
