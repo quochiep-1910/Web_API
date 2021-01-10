@@ -13,9 +13,11 @@
         $scope.keyword = '';
 
         $scope.search = search;
+
         function search() {
             getProductCategories();
         }
+
         function getProductCategories(page) {
             page = page || 0; //nếu page nếu page ko có giá trị thì thay bằng 0
 

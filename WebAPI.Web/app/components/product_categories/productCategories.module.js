@@ -9,6 +9,10 @@
             url: "/product_categories",//trỏ tới url này thì nó chuyển vào view html bên dưới
             templateUrl: "/app/components/product_categories/productCategoryListView.html",
             controller: "producteCategoryListController" //nó tự chạy js controller này
+        }).state('add_product_category', { //khai báo cho đường dẫn admin và dùng controller
+            url: "/add_product_category",//trỏ tới url này thì nó chuyển vào view html bên dưới
+            templateUrl: "/app/components/product_categories/productCategoryAddView.html",
+            controller: "productCategoryAddController" //nó tự chạy js controller này
         });
     }
 })();

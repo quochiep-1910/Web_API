@@ -32,6 +32,29 @@ namespace WebAPI.Web.Infrastructure.Extensions
             postCategory.Status = postCategoryViewModel.Status;
         }
 
+        public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryViewModel)
+        {
+            productCategory.ID = productCategoryViewModel.ID;
+            productCategory.Name = productCategoryViewModel.Name;
+
+            productCategory.Alias = productCategoryViewModel.Alias;
+            productCategory.Description = productCategoryViewModel.Description;
+            productCategory.ParentID = productCategoryViewModel.ParentID;
+
+            productCategory.DisplayOrder = productCategoryViewModel.DisplayOrder;
+            productCategory.Image = productCategoryViewModel.Image;
+            productCategory.HomeFlag = productCategoryViewModel.HomeFlag;
+
+            productCategory.CreatedDate = productCategoryViewModel.CreatedDate;
+            productCategory.CreatedBy = productCategoryViewModel.CreatedBy;
+            productCategory.UpdatedDate = productCategoryViewModel.UpdatedDate;
+            productCategory.UpdatedBy = productCategoryViewModel.UpdatedBy;
+            productCategory.MetaKeyword = productCategoryViewModel.MetaKeyword;
+
+            productCategory.MetaDescription = productCategoryViewModel.MetaDescription;
+            productCategory.Status = productCategoryViewModel.Status;
+        }
+
         public static void UpdatePost(this Post post, PostViewModel postViewModel)
         {
             post.ID = postViewModel.ID;
