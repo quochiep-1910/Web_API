@@ -32,15 +32,15 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không có bản ghi nào được tìm thấy.');
                 }
-                else {
-                    notificationService.displaySuccess('Đã tìm thấy ' + result.data.TotalCount + ' bản ghi');
-                }
+                //else {
+                //    notificationService.displaySuccess('Đã tìm thấy ' + result.data.TotalCount + ' bản ghi');
+                //}
                 $scope.productCategories = result.data.Items; //nhận kết quả từ reponse
                 $scope.page = result.data.Page;                  //nhận giá trị tự api/productcategory/getall
                 $scope.pagesCount = result.data.TotalPages;        //nhận giá trị tự api/productcategory/getall
                 $scope.totalCount = result.data.TotalCount;      //nhận giá trị tự api/productcategory/getall
             }, function () {
-                console.log('Load productcategory failed.'); //ghi log
+                console.log('Tải danh mục sản phẩm không thành công.'); //ghi log
             })
         }
         $scope.getProductCategories(); //chạy khi controller khởi tạo

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,8 +10,10 @@ namespace WebAPI.Web.Models
     {
         public int ID { set; get; }
 
+        [Required]
         public string Name { set; get; }
 
+        [Required]
         public string Alias { set; get; }
 
         public string Description { set; get; }
@@ -37,6 +40,7 @@ namespace WebAPI.Web.Models
 
         public string MetaDescription { set; get; }
 
+        [Required]
         public bool Status { set; get; }
     }
 }
