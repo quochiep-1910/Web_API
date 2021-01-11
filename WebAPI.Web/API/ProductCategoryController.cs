@@ -81,6 +81,7 @@ namespace WebAPI.Web.API
                  {
                      var newProductCategory = new ProductCategory();
                      newProductCategory.UpdateProductCategory(productCategoryViewModel);
+                     newProductCategory.CreatedDate = DateTime.Now;
 
                      _productCategoryService.Add(newProductCategory);
                      _productCategoryService.Save();
@@ -91,6 +92,51 @@ namespace WebAPI.Web.API
 
                  return response;
              });
+        }
+
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetById(id);
+
+                var reponseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(model); //lấy giữ liệu thông qua mapper
+
+                var response = request.CreateResponse(HttpStatusCode.OK, reponseData);
+                return response;
+            });
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryViewModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    //trả về lỗi để bên ngoài bắt được sự kiện lỗi này
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var dbProductCategory = _productCategoryService.GetById(productCategoryViewModel.ID);
+                    dbProductCategory.UpdateProductCategory(productCategoryViewModel);
+                    dbProductCategory.UpdatedDate = DateTime.Now;
+
+                    _productCategoryService.Update(dbProductCategory);
+                    _productCategoryService.Save();
+
+                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+
+                return response;
+            });
         }
     }
 }

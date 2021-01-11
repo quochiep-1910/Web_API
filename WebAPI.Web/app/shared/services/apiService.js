@@ -6,7 +6,8 @@
     function apiService($http, notificationService) {
         return {
             get: get, //gọi lại func get ở dưới
-            post: post
+            post: post,
+            put: put
         }
         function post(url, data, success, failure) {
             $http.post(url, data).then(function (result) {
@@ -22,6 +23,14 @@
         }
         function get(url, params, success, failure) {
             $http.get(url, params).then(function (result)//then là xủ lý xog sau khi gọi
+            {
+                success(result); //nhận thông tin trả
+            }, function (error) {
+                failure(error); //bắt lỗi
+            });
+        }
+        function put(url, params, success, failure) {
+            $http.put(url, params).then(function (result)//then là xủ lý xog sau khi gọi
             {
                 success(result); //nhận thông tin trả
             }, function (error) {
