@@ -7,10 +7,24 @@
         return {
             get: get, //gọi lại func get ở dưới
             post: post,
-            put: put
+            put: put,
+            del: del
         }
         function post(url, data, success, failure) {
             $http.post(url, data).then(function (result) {
+                success(result);
+            }, function (error) {//bắt lỗi 401
+                if (error.status === 401) {
+                    notificationService.displayError('Xác thực là bắt buộc.');
+                } //bắt lỗi từ api trả về
+                else if (failure != null) {
+                    failure(error);
+                }
+            });
+        }
+
+        function del(url, data, success, failure) {
+            $http.delete(url, data).then(function (result) {
                 success(result);
             }, function (error) {//bắt lỗi 401
                 if (error.status === 401) {
