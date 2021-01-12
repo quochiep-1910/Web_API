@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -251,6 +253,7 @@
     <Content Include="Assets\admin\css\alt\adminlte.pages.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\admin\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Assets\admin\css\custom.css" />
     <Content Include="Assets\admin\img\AdminLTELogo.png" />
     <Content Include="Assets\admin\img\avatar.png" />
     <Content Include="Assets\admin\img\avatar04.png" />
@@ -306,6 +309,55 @@
     <Content Include="Assets\admin\libs\angular\angular.js" />
     <Content Include="Assets\admin\libs\angular\angular.min.js" />
     <Content Include="Assets\admin\libs\angular\index.js" />
+    <Content Include="Assets\admin\libs\bootbox\.gitignore" />
+    <Content Include="Assets\admin\libs\bootbox\bootbox.all.js" />
+    <Content Include="Assets\admin\libs\bootbox\bootbox.js" />
+    <Content Include="Assets\admin\libs\bootbox\bootbox.locales.js" />
+    <Content Include="Assets\admin\libs\bootbox\dist\bootbox.all.min.js" />
+    <Content Include="Assets\admin\libs\bootbox\dist\bootbox.locales.min.js" />
+    <Content Include="Assets\admin\libs\bootbox\dist\bootbox.min.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ar.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\az.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\bg_BG.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\cs.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\da.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\de.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\el.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\en.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\es.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\et.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\eu.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\fa.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\fi.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\fr.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\he.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\hr.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\hu.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\id.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\it.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ja.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ka.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ko.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\lt.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\lv.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\nl.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\no.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\pl.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\pt-br.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\pt.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ru.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\sk.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\sl.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\sq.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\sv.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\sw.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\ta.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\th.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\tr.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\uk.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\vi.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\zh_CN.js" />
+    <Content Include="Assets\admin\libs\bootbox\locales\zh_TW.js" />
     <Content Include="Assets\admin\libs\bootstrap\.babelrc.js" />
     <Content Include="Assets\admin\libs\bootstrap\.gitattributes" />
     <Content Include="Assets\admin\libs\bootstrap\.gitignore" />
@@ -813,6 +865,18 @@
     <Content Include="Assets\admin\libs\jQuery\test\unit\tween.js" />
     <Content Include="Assets\admin\libs\jQuery\test\unit\wrap.js" />
     <Content Include="Assets\admin\libs\jQuery\test\xhtml.php" />
+    <Content Include="Assets\admin\libs\ngBootbox\dist\ngBootbox.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\dist\ngBootbox.min.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\app.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\custom-dialog.tpl.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\app.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\main.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\require.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\gulpfile.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\ngBootbox.js" />
     <Content Include="Assets\admin\libs\toastr\toastr.css" />
     <Content Include="Assets\admin\libs\toastr\toastr.js" />
     <Content Include="Assets\admin\libs\toastr\toastr.min.css" />
@@ -1206,6 +1270,22 @@
     <Content Include="Assets\admin\libs\toastr\toastr.js.map" />
     <Content Include="Assets\admin\libs\toastr\toastr.less" />
     <Content Include="Assets\admin\libs\toastr\toastr.scss" />
+    <Content Include="Assets\admin\libs\bootbox\.bower.json" />
+    <Content Include="Assets\admin\libs\bootbox\.jshintrc" />
+    <Content Include="Assets\admin\libs\bootbox\.npmignore" />
+    <Content Include="Assets\admin\libs\bootbox\.travis.yml" />
+    <Content Include="Assets\admin\libs\bootbox\bower.json" />
+    <Content Include="Assets\admin\libs\bootbox\composer.json" />
+    <Content Include="Assets\admin\libs\bootbox\CONTRIBUTING.md" />
+    <Content Include="Assets\admin\libs\bootbox\LICENSE.md" />
+    <Content Include="Assets\admin\libs\bootbox\package-lock.json" />
+    <Content Include="Assets\admin\libs\bootbox\package.json" />
+    <Content Include="Assets\admin\libs\bootbox\README.md" />
+    <Content Include="Assets\admin\libs\ngBootbox\.bower.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\bower.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\package.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\README.md" />
+    <Content Include="Assets\admin\libs\ngBootbox\tsd.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -1230,11 +1310,20 @@
       <Name>WebAPI.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\tsd.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
