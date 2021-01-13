@@ -79,5 +79,40 @@ namespace WebAPI.Web.Infrastructure.Extensions
             post.MetaDescription = postViewModel.MetaDescription;
             post.Status = postViewModel.Status;
         }
+
+        public static void UpdateProduct(this Product product, ProductViewModel productViewModel)
+        {
+            product.ID = productViewModel.ID;
+            product.Name = productViewModel.Name;
+
+            product.Alias = productViewModel.Alias;
+            product.Description = productViewModel.Description;
+            product.CategoryID = productViewModel.CategoryID;
+
+            product.Content = productViewModel.Content;
+            product.HotFlag = productViewModel.HotFlag;
+            product.ViewCount = productViewModel.ViewCount;
+
+            product.Image = productViewModel.Image;
+            product.Price = productViewModel.Price;
+            product.PromotionPrice = productViewModel.PromotionPrice;
+
+            product.Warranty = productViewModel.Warranty;
+            product.Tags = productViewModel.Tags;
+            product.Quantity = productViewModel.Quantity;
+
+            product.MoreImages = productViewModel.MoreImages;
+            product.HomeFlag = productViewModel.HomeFlag;
+            product.OriginalPrice = productViewModel.OriginalPrice;
+
+            product.CreatedDate = productViewModel.CreatedDate;
+            product.CreatedBy = productViewModel.CreatedBy;
+            product.UpdatedDate = productViewModel.UpdatedDate;
+            product.UpdatedBy = productViewModel.UpdatedBy;
+
+            product.MetaKeyword = productViewModel.MetaKeyword;
+            product.MetaDescription = productViewModel.MetaDescription;
+            product.Status = productViewModel.Status;
+        }
     }
 }

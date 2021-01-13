@@ -40,6 +40,19 @@ namespace WebAPI.Web.Models
         public int Quantity { set; get; }
 
         public decimal OriginalPrice { set; get; }
+        public DateTime? CreatedDate { set; get; }
+
+        public string CreatedBy { set; get; }
+
+        public DateTime? UpdatedDate { set; get; }
+
+        public string UpdatedBy { set; get; }
+
+        public string MetaKeyword { set; get; }
+
+        public string MetaDescription { set; get; }
+
+        public bool Status { set; get; }
 
         public virtual ProductCategory ProductCategory { set; get; }
 
