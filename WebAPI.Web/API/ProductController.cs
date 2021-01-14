@@ -112,7 +112,6 @@ namespace WebAPI.Web.API
 
         [Route("update")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductViewModel productViewModel)
         {
             return CreateHttpResponse(request, () =>
@@ -142,7 +141,6 @@ namespace WebAPI.Web.API
 
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
