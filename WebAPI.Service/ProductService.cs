@@ -108,7 +108,7 @@ namespace WebAPI.Service
             _productRepository.Update(Product);
             if (!string.IsNullOrEmpty(Product.Tags))//nếu product.tag null or empty
             {
-                string[] tags = Product.Tags.Split(','); //tách chuỗi nhập vào bằng dấu [,]
+                string[] tags = Product.Tags.Split(','); //tách chuỗi nhập vào khi gặp dấu [,]
                 for (var i = 0; i < tags.Length; i++)
                 {
                     var tagId = StringHelper.ToUnsignString(tags[i]); //chuyển đổi tag theo StringHelper

@@ -20,6 +20,7 @@
             $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
         }
         function AddProduct() {
+            $scope.product.MoreImages = JSON.stringify($scope.moreImages) //gán MoreImages vào scope rồi chuyển sang dạng chuỗi
             apiService.post('/api/product/create', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + 'đã thêm mới');
@@ -40,9 +41,21 @@
         $scope.ChooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.Image = fileUrl;
+                $scope.$apply(function () { //apply là load lại ngay lập tức nếu có hình
+                    $scope.product.Image = fileUrl;
+                })
             }
-            finder.popup();
+            finder.popup(); //lệnh bật của sổ của CKfinder
+        }
+        $scope.moreImages = [];
+        $scope.ChooseMoreImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {//apply là load lại ngay lập tức nếu có hình
+                    $scope.moreImages.push(fileUrl);
+                })
+            }
+            finder.popup(); //lệnh bật của sổ của CKfinder
         }
         loadProductCategory();
     }
