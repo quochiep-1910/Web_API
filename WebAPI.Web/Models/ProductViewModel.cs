@@ -4,7 +4,6 @@ using WebAPI.Model.Models;
 
 namespace WebAPI.Web.Models
 {
-    [Serializable]
     public class ProductViewModel
     {
         public int ID { set; get; }
@@ -56,6 +55,6 @@ namespace WebAPI.Web.Models
 
         public virtual ProductCategory ProductCategory { set; get; }
 
-        public virtual IEnumerable<ProductTag> ProductTags { set; get; }
+        //public virtual IEnumerable<ProductTag> ProductTags { set; get; }
     }
 }
