@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebAPI.Common;
 using WebAPI.Data.Infrastructure;
 using WebAPI.Data.Repositories;
 using WebAPI.Model.Models;
@@ -28,16 +29,45 @@ namespace WebAPI.Service
 
         private IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        private ITagRepository _tagRepository;
+
+        private IProductTagRepository _productTagRepository;
+
+        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork,
+           IProductTagRepository productTagRepository, ITagRepository tagRepository)
         {
             this._productRepository = productRepository;
             this._unitOfWork = unitOfWork;
+
+            this._productTagRepository = productTagRepository;
+            this._tagRepository = tagRepository;
         }
 
         public Product Add(Product Product)
-
         {
-            return _productRepository.Add(Product);
+            var product = _productRepository.Add(Product);
+            _unitOfWork.Commit(); //commit lần 1 để có giá trị(Id, name,..) để truyền xuống if
+            if (!string.IsNullOrEmpty(Product.Tags))//nếu product.tag null or empty
+            {
+                string[] tags = Product.Tags.Split(','); //tách chuỗi nhập vào bằng dấu [,]
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]); //chuyển đổi tag theo StringHelper
+                    if (_tagRepository.Count(x => x.ID == tagId) == 0)//nếu = 0thì tạo mới tag
+                    {
+                        Tag tag = new Tag();
+                        tag.ID = tagId;
+                        tag.Name = tags[i];
+                        tag.Type = CommonConstants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+                    ProductTag productTag = new ProductTag();
+                    productTag.ProductID = Product.ID;
+                    productTag.TagID = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
+            return product;
         }
 
         public Product Delete(int id)
@@ -76,6 +106,27 @@ namespace WebAPI.Service
         public void Update(Product Product)
         {
             _productRepository.Update(Product);
+            if (!string.IsNullOrEmpty(Product.Tags))//nếu product.tag null or empty
+            {
+                string[] tags = Product.Tags.Split(','); //tách chuỗi nhập vào bằng dấu [,]
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]); //chuyển đổi tag theo StringHelper
+                    if (_tagRepository.Count(x => x.ID == tagId) == 0)//nếu = 0thì tạo mới tag
+                    {
+                        Tag tag = new Tag();
+                        tag.ID = tagId;
+                        tag.Name = tags[i];
+                        tag.Type = CommonConstants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+                    _productTagRepository.DeleteMulti(x => x.ProductID == Product.ID);//muốn update thì phải xoá hết bản ghi cũ đi
+                    ProductTag productTag = new ProductTag();
+                    productTag.ProductID = Product.ID;
+                    productTag.TagID = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
         }
     }
 }
