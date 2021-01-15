@@ -223,6 +223,8 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\login\loginController.js" />
+    <Content Include="app\components\login\loginView.html" />
     <Content Include="app\components\products\products.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productAddView.html" />
@@ -247,6 +249,7 @@
     <Content Include="app\shared\services\apiService.js" />
     <Content Include="app\shared\services\commonService.js" />
     <Content Include="app\shared\services\notificationService.js" />
+    <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\admin\css\adminlte.css" />
     <Content Include="Assets\admin\css\adminlte.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.components.css" />
@@ -260,6 +263,8 @@
     <Content Include="Assets\admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\admin\css\alt\adminlte.plugins.min.css" />
     <Content Include="Assets\admin\css\custom.css" />
+    <Content Include="Assets\admin\css\icheck-bootrap\icheck-bootstrap.css" />
+    <Content Include="Assets\admin\css\icheck-bootrap\icheck-bootstrap.min.css" />
     <Content Include="Assets\admin\img\AdminLTELogo.png" />
     <Content Include="Assets\admin\img\avatar.png" />
     <Content Include="Assets\admin\img\avatar04.png" />
@@ -274,6 +279,7 @@
     <Content Include="Assets\admin\img\credit\mestro.png" />
     <Content Include="Assets\admin\img\credit\paypal.png" />
     <Content Include="Assets\admin\img\credit\paypal2.png" />
+    <Content Include="Assets\admin\img\quochiep.jpg" />
     <Content Include="Assets\admin\img\credit\visa.png" />
     <Content Include="Assets\admin\img\default-150x150.png" />
     <Content Include="Assets\admin\img\icons.png" />
@@ -5049,6 +5055,7 @@
     <Content Include="Assets\admin\libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\admin\libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\admin\libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\admin\css\icheck-bootrap\LICENSE" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
