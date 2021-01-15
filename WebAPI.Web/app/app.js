@@ -5,12 +5,23 @@
         'grocery.product_categories',]).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'] //tiêm thuộc tính có sẵn trong angular
+
     function config($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('home', { //khai báo cho đường dẫn admin và dùng controller
-            url: "/admin",
-            templateUrl: "/app/components/home/homeView.html",
-            controller: "homeController"
-        });
+        $stateProvider
+            .state('base', {//khai báo cho đường dẫn admin và dùng controller
+                url: '',
+                templateUrl: '/app/shared/views/baseView.html',
+                abstract: true
+            }).state('login', { //khai báo cho đường dẫn admin và dùng controller
+                url: "/login",
+                templateUrl: "/app/components/login/loginView.html",
+                controller: "loginController"
+            }).state('home', { //khai báo cho đường dẫn admin và dùng controller
+                url: "/admin",
+                parent: 'base',
+                templateUrl: "/app/components/home/homeView.html",
+                controller: "homeController"
+            });
         $urlRouterProvider.otherwise('/admin'); //otherwise là nếu ko thì trả về admin
     }
 })();
