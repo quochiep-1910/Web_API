@@ -22,6 +22,6 @@
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
             });
-        $urlRouterProvider.otherwise('/admin'); //otherwise là nếu ko thì trả về admin
+        $urlRouterProvider.otherwise('/login'); //otherwise là nếu ko thì trả về admin (đây coi như là trang đầu tiên)
     }
 })();

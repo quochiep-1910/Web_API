@@ -8,7 +8,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập hệ thống</p>
 
-                <form action="#" method="post">
+                <form role="form" method="post" ng-submit="loginSubmit()" ng-controller="rootController">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
