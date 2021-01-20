@@ -15,6 +15,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/productcategory")]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         private IProductCategoryService _productCategoryService;
@@ -83,6 +84,7 @@ namespace WebAPI.Web.API
                      var newProductCategory = new ProductCategory();
                      newProductCategory.UpdateProductCategory(productCategoryViewModel);
                      newProductCategory.CreatedDate = DateTime.Now;
+                     newProductCategory.CreatedBy = User.Identity.Name;
 
                      _productCategoryService.Add(newProductCategory);
                      _productCategoryService.Save();
@@ -128,7 +130,7 @@ namespace WebAPI.Web.API
                     var dbProductCategory = _productCategoryService.GetById(productCategoryViewModel.ID);
                     dbProductCategory.UpdateProductCategory(productCategoryViewModel);
                     dbProductCategory.UpdatedDate = DateTime.Now;
-
+                    dbProductCategory.CreatedBy = User.Identity.Name;
                     _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.Save();
 

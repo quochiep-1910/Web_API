@@ -15,6 +15,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         private IProductService _productService;
