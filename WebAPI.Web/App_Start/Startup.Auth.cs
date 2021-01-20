@@ -25,32 +25,16 @@ namespace WebAPI.Web.App_Start
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-            app.CreatePerOwinContext<UserManager<ApplicationUser>>(CreateManager);
+            app.CreatePerOwinContext<UserManager<ApplicationUser>>(CreateManager); // CreatePerOwinContext để quản lý user manager (giảm phụ thuộc service và application)
 
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/oauth/token"),
+                TokenEndpointPath = new PathString("/oauth/token"), //tất cả đường dẫn đều thông qua cái này
                 Provider = new AuthorizationServerProvider(),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 AllowInsecureHttp = true,
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-            // Configure the sign in cookie
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/dang-nhap.html"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
-                }
-            });
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -74,57 +58,64 @@ namespace WebAPI.Web.App_Start
 
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {
-            public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+            public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context) //khi đăng nhập thì gửi lên service 1 req
             {
                 context.Validated();
             }
 
-            //public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-            //{
-            //    var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
+            public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+            {
+                //cho phép đăng nhập từ các domain khác ()
+                var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
 
-            //    if (allowedOrigin == null) allowedOrigin = "*";
+                if (allowedOrigin == null) allowedOrigin = "*";
 
-            //    context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
-
-            //    UserManager<ApplicationUser> userManager = context.OwinContext.GetUserManager<UserManager<ApplicationUser>>();
-            //    ApplicationUser user;
-            //    try
-            //    {
-            //        user = await userManager.FindAsync(context.UserName, context.Password);
-            //    }
-            //    catch
-            //    {
-            //        // Could not retrieve the user due to error.
-            //        context.SetError("server_error");
-            //        context.Rejected();
-            //        return;
-            //    }
-            //    if (user != null)
-            //    {
-            //        var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
-            //        var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
-            //        if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
-            //        {
-            //            ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-            //                           user,
-            //                           DefaultAuthenticationTypes.ExternalBearer);
-            //            context.Validated(identity);
-            //        }
-            //        else
-            //        {
-            //            context.Rejected();
-            //            context.SetError("invalid_group", "Bạn không phải là admin");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.'");
-            //        context.Rejected();
-            //    }
-            //}
+                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+                //tìm kiếm user pass trong data để có hợp lệ hay không
+                UserManager<ApplicationUser> userManager = context.OwinContext.GetUserManager<UserManager<ApplicationUser>>();
+                ApplicationUser user;
+                try
+                {
+                    user = await userManager.FindAsync(context.UserName, context.Password);
+                }
+                catch
+                {
+                    // Không thể truy xuất người dùng do lỗi.
+                    context.SetError("server_error");
+                    context.Rejected();
+                    return;
+                }
+                if (user != null) //đăng nhập thành công
+                {
+                    //var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
+                    //var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
+                    //if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
+                    //{
+                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                   user,
+                                   DefaultAuthenticationTypes.ExternalBearer);
+                    context.Validated(identity);
+                    //}
+                    //else
+                    //{
+                    //    context.Rejected();
+                    //    context.SetError("invalid_group", "Bạn không phải là admin");
+                    //}
+                }
+                else
+                {
+                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.'");
+                    context.Rejected();
+                }
+            }
         }
 
+        /// <summary>
+        /// Quản lý user (tạo ra user manager để tương tác)
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         private static UserManager<ApplicationUser> CreateManager(IdentityFactoryOptions<UserManager<ApplicationUser>> options, IOwinContext context)
         {
             var userStore = new UserStore<ApplicationUser>(context.Get<GroceryDbContext>());

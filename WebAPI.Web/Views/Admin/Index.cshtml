@@ -18,17 +18,19 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="/Assets/admin/css/adminlte.min.css">
+
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="/Assets/admin/css/icheck-bootrap/icheck-bootstrap.min.css">
 
     <!--toastr-->
     <link href="/Assets/admin/libs/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Assets/admin/libs/angular-loading-bar/build/loading-bar.css" rel="stylesheet" />
     <link href="~/Assets/admin/css/custom.css" rel="stylesheet" />
     <!--/toastr-->
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini" ng-app="grocery">
+<body class="hold-transition sidebar-mini" ng-app="grocery" ng-controller="rootController">
     <div ui-view></div>
     <!-- Site wrapper -->
     <!-- ./wrapper -->
@@ -49,7 +51,8 @@
     <script src="~/Assets/admin/libs/toastr/toastr.js"></script>
     <script src="~/Assets/admin/libs/bootbox/bootbox.js"></script>
     <script src="~/Assets/admin/libs/ckeditor/ckeditor.js"></script>
-
+    <script src="~/Assets/admin/libs/angular-local-stroage/dist/angular-local-storage.js"></script>
+    <script src="~/Assets/admin/libs/angular-loading-bar/build/loading-bar.js"></script>
     <script src="~/Assets/admin/libs/ckfinder/ckfinder.js"></script>
     <script src="~/Assets/admin/libs/ng-ckeditor/ng-ckeditor.js"></script>
     <script src="~/Assets/admin/libs/ngBootbox/ngBootbox.js"></script>
@@ -60,8 +63,10 @@
     <script src="~/app/shared/services/apiService.js"></script>
     <script src="~/app/shared/directives/pagerDiretive.js"></script>
     <script src="~/app/shared/services/notificationService.js"></script>
-
     <script src="~/app/shared/services/commonService.js"></script>
+    <script src="~/app/shared/services/authData.js"></script>
+    <script src="~/app/shared/services/authenticationService.js"></script>
+    <script src="~/app/shared/services/loginService.js"></script>
 
     <!--components-->
     <script src="~/app/components/products/products.module.js"></script>

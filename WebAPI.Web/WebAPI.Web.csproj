@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
+    <Compile Include="API\HomeController.cs" />
     <Compile Include="API\PostCategoryController.cs" />
     <Compile Include="API\ProductCategoryController.cs" />
     <Compile Include="API\ProductController.cs" />
@@ -248,8 +249,12 @@
     <Content Include="app\shared\modules\grocery.common.js" />
     <Content Include="app\shared\modules\readme.txt" />
     <Content Include="app\shared\services\apiService.js" />
+    <Content Include="app\shared\services\authData.js" />
+    <Content Include="app\shared\services\authenticationService.js" />
     <Content Include="app\shared\services\commonService.js" />
+    <Content Include="app\shared\services\loginService.js" />
     <Content Include="app\shared\services\notificationService.js" />
+    <Content Include="app\shared\services\readme.txt" />
     <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\admin\css\adminlte.css" />
     <Content Include="Assets\admin\css\adminlte.min.css" />
@@ -307,6 +312,22 @@
     <Content Include="Assets\admin\js\pages\dashboard.js" />
     <Content Include="Assets\admin\js\pages\dashboard2.js" />
     <Content Include="Assets\admin\js\pages\dashboard3.js" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\build\loading-bar.css" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\build\loading-bar.js" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\build\loading-bar.min.css" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\build\loading-bar.min.js" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\Gruntfile.js" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\index.js" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\src\loading-bar.css" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\src\loading-bar.js" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.gitattributes" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.gitignore" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\demo\demo-app.js" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\demo\demo-style.css" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\demo\demo.html" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\dist\angular-local-storage.js" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\dist\angular-local-storage.min.js" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\index.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\jest.config.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\karma.conf.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\release\angular-ui-router.js" />
@@ -5057,6 +5078,25 @@
     <Content Include="Assets\admin\libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\admin\libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\admin\css\icheck-bootrap\LICENSE" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\.bower.json" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\bower.json" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\CHANGELOG.md" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\CONTRIBUTING.md" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\ISSUE_TEMPLATE.md" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\LICENSE" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\package.json" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Assets\admin\libs\angular-loading-bar\README.md" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.bower.json" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.bowerrc" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.editorconfig" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\.travis.yml" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\bower.json" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\CHANGELOG.md" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\dist\angular-local-storage.min.js.map" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\LICENSE" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\package.json" />
+    <Content Include="Assets\admin\libs\angular-local-stroage\README.md" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
