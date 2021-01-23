@@ -34,11 +34,10 @@
 
     /* slider activation */
     $('.slider_active').owlCarousel({
-        animateOut: 'fadeOut',
         loop: true,
         nav: false,
-        autoplay: false,
-        autoplayTimeout: 8000,
+        autoplay: true,
+        autoplayTimeout: 5000,
         items: 1,
         dots: true,
         responsiveClass: true,

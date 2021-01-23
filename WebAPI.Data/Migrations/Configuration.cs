@@ -88,9 +88,9 @@
             {
                 List<Slide> listSlide = new List<Slide>()
                 {
-                    new Slide(){Name="Slide 1", DisplayOrder=1,Status=true,Url="#",Image="/Assets/client/img/slider/slide_1.png",Content=@"<h1>Women's Fashion</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><a href=""#"">shop now</a>"},
-                    new Slide(){Name="Slide 2", DisplayOrder=2,Status=true,Url="#",Image="/Assets/client/img/slider/slide_2.png",Content=@"<h1>New Collection</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><a href=""#"">shop now</a>"},
-                    new Slide(){Name="Slide 2", DisplayOrder=3,Status=true,Url="#",Image="/Assets/client/img/slider/slide_3.png",Content=@"<h1>Best Collection</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><a href=""#"">shop now</a>"}
+                    new Slide(){Name="Slide 1", DisplayOrder=1,Status=true,Url="#",Image="/Assets/client/img/slider/slider_1.png",Content=@"<h1>Women's Fashion</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>"},
+                    new Slide(){Name="Slide 2", DisplayOrder=2,Status=true,Url="#",Image="/Assets/client/img/slider/slider_2.png",Content=@"<h1>New Collection</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>"},
+                    new Slide(){Name="Slide 2", DisplayOrder=3,Status=true,Url="#",Image="/Assets/client/img/slider/slider_3.png",Content=@"<h1>Best Collection</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>"}
                 };
                 context.Slides.AddRange(listSlide);
                 context.SaveChanges();
