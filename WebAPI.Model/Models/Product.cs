@@ -52,6 +52,9 @@ namespace WebAPI.Model.Models
 
         public decimal OriginalPrice { set; get; }
 
+        [MaxLength(256)]
+        public string ImageHotTag { set; get; }
+
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { set; get; }
 
