@@ -18,6 +18,8 @@ namespace WebAPI.Web.Models
 
         public string MoreImages { set; get; }
 
+        public string ImageHotTag { set; get; }
+
         public decimal Price { set; get; }
 
         public decimal? PromotionPrice { set; get; }
