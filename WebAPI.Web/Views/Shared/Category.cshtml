@@ -21,7 +21,11 @@
                 var childCategories = Model.Where(x => x.ParentID == category.ID);
 
                 <li class="has-sub">
-                    <a href="@url">@(childCategories.Count() > 0 ? "<i class=\"fa fa-caret-right\"></i> " : "")@category.Name</a>
+                    <a href="@url">
+                        <i @(childCategories.Count() > 0 ? "class=fa-caret-right" : "")></i>
+                        @category.Name
+                    </a>
+
                     @if (childCategories.Count() > 0)
                     {
                         <ul class="categorie_sub">
