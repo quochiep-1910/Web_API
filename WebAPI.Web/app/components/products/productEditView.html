@@ -100,6 +100,14 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Ảnh Tag cho sản phẩm</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" name="ImageHotTag" ng-model="product.ImageHotTag">
+                    <span ng-show="frmAddProduct.ImageHotTag.$error.maxlength" class="has-error">Hình Ảnh vượt quá 256 kí tự</span>
+                    <button class="btn btn-default" type="button" ng-click="ChooseImageHotTag()">Chọn ảnh</button>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="Content" ckeditor="ckeditorOptions"

@@ -29,7 +29,7 @@
         }
 
         function loadProductDetail() {//load giá trị lên để modify
-            apiService.get('api/product/getbyid/' + $stateParams.id, null, function (result) {
+            apiService.get('/api/product/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;//lấy dữ liệu
                 $scope.moreImages = JSON.parse($scope.product.MoreImages); //chuyển moreImages sang dạng mảng.
             }, function (error) {
@@ -53,6 +53,15 @@
                 })
             }
             finder.popup();
+        }
+        $scope.ChooseImageHotTag = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () { //apply là load lại ngay lập tức nếu có hình
+                    $scope.product.ImageHotTag = fileUrl;
+                })
+            }
+            finder.popup(); //lệnh bật của sổ của CKfinder
         }
         $scope.ChooseMoreImage = function () {//chọn nhiều ảnh
             var finder = new CKFinder();

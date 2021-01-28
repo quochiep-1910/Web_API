@@ -47,6 +47,15 @@
             }
             finder.popup(); //lệnh bật của sổ của CKfinder
         }
+        $scope.ChooseImageHotTag = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () { //apply là load lại ngay lập tức nếu có hình
+                    $scope.product.ImageHotTag = fileUrl;
+                })
+            }
+            finder.popup(); //lệnh bật của sổ của CKfinder
+        }
         $scope.moreImages = [];
         $scope.ChooseMoreImage = function () {
             var finder = new CKFinder();

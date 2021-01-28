@@ -18,7 +18,7 @@
         }
 
         function loadProductCategoryDetail() {
-            apiService.get('api/productcategory/getbyid/' + $stateParams.id, null, function (result) {
+            apiService.get('/api/productcategory/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.productCategory = result.data;//lấy dữ liệu
             }, function (error) {
                 notificationService.displayError(error.data);

@@ -69,7 +69,7 @@
                         id: id
                     }
                 }
-                apiService.del('api/product/delete', config, function () {
+                apiService.del('/api/product/delete', config, function () {
                     //xoá thành công
                     notificationService.displaySuccess('Xoá thành công');
                     search(); //gọi là hàm search (cập nhập lại)
