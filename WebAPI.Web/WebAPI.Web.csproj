@@ -204,8 +204,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4752,6 +4756,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\plugins\" />
     <Folder Include="UploadFiles\" />
+    <Folder Include="Views\About\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Post\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -5219,6 +5227,8 @@
     <Content Include="Assets\client\fonts\MyriadPro-Regular-3.bin" />
     <Content Include="Assets\client\fonts\MyriadPro-Regular.bin" />
     <Content Include="Assets\client\fonts\MyriadPro-Regular.ttf" />
+    <Content Include="Assets\client\css\bootstrap.min.css.map" />
+    <Content Include="Assets\client\js\bootstrap.min.js.map" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
