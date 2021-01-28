@@ -94,6 +94,8 @@ namespace WebAPI.Web.Infrastructure.Extensions
             product.ViewCount = productViewModel.ViewCount;
 
             product.Image = productViewModel.Image;
+
+            product.ImageHotTag = productViewModel.ImageHotTag;
             product.Price = productViewModel.Price;
             product.PromotionPrice = productViewModel.PromotionPrice;
 
