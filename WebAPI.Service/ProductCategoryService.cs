@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebAPI.Data.Infrastructure;
 using WebAPI.Data.Repositories;
 using WebAPI.Model.Models;
@@ -18,6 +19,8 @@ namespace WebAPI.Service
         IEnumerable<ProductCategory> GetAll(string keyword);
 
         IEnumerable<ProductCategory> GetAllByParentId(int parentId);
+
+        IEnumerable<ProductCategory> GetAllByParentId();
 
         ProductCategory GetById(int id);
 
@@ -68,6 +71,11 @@ namespace WebAPI.Service
         public IEnumerable<ProductCategory> GetAllByParentId(int parentId)
         {
             return _ProductCategoryRepository.GetMulti(x => x.Status && x.ParentID == parentId);
+        }
+
+        public IEnumerable<ProductCategory> GetAllByParentId()
+        {
+            return _ProductCategoryRepository.GetMulti(x => x.Status == true).OrderBy(x => x.DisplayOrder);
         }
 
         public ProductCategory GetById(int id)
