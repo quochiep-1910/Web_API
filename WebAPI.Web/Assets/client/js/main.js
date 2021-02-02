@@ -13,6 +13,10 @@
         }
     });
 
+    $('#current').on('change', function () {
+        var value = $(this).val();
+    });
+
     /*----------------------------
     jQuery MeanMenu
     ------------------------------ */

@@ -8,14 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/Assets/client/img/favicon.png">
-
+    <link href="~/Assets/client/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
     <!-- all css here -->
     <link rel="stylesheet" href="/Assets/client/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Assets/client/css/plugin.css">
     <link rel="stylesheet" href="/Assets/client/css/bundle.css">
     <link rel="stylesheet" href="/Assets/client/css/style.css">
     <link rel="stylesheet" href="/Assets/client/css/responsive.css">
+    <link href="/Assets/admin/libs/jqueri-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
     <script src="/Assets/client/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <!--Jquery-->
 </head>
 <body>
     <!-- Add your site or application content here -->
@@ -31,7 +34,45 @@
                 <!--pos home section-->
                 <div class=" pos_home_section">
                     <div class="row pos_home">
-                        @{ Html.RenderAction("Category", "Home");}
+                        <div class="col-lg-3 col-md-8 col-12">
+                            @{ Html.RenderAction("Category", "Home");}
+                            @RenderSection("Sidebar", required: false)
+                            @*<div class="sidebar_widget wishlist mb-35">
+                                    <div class="block_title">
+                                        <h3><a href="san-pham.html">Sản phẩm có lượt xem nhiều nhất</a></h3>
+                                    </div>
+                                    <div class="cart_item">
+                                        <div class="cart_img">
+                                            <a href="#"><img src="/Assets/client/img/cart/cart.jpg" alt=""></a>
+                                        </div>
+                                        <div class="cart_info">
+                                            <a href="#">lorem ipsum dolor</a>
+                                            <span class="cart_price">$115.00</span>
+                                            <span class="quantity">Qty: 1</span>
+                                        </div>
+                                        <div class="cart_remove">
+                                            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="cart_item">
+                                        <div class="cart_img">
+                                            <a href="#"><img src="/Assets/client/img/cart/cart2.jpg" alt=""></a>
+                                        </div>
+                                        <div class="cart_info">
+                                            <a href="#">Quisque ornare dui</a>
+                                            <span class="cart_price">$105.00</span>
+                                            <span class="quantity">Qty: 1</span>
+                                        </div>
+                                        <div class="cart_remove">
+                                            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="block_content">
+                                        <p>2  products</p>
+                                        <a href="san-pham-ban-chay.html">» Xem tất cả</a>
+                                    </div>
+                                </div>*@
+                        </div>
                         @RenderBody()
                     </div>
                 </div>
@@ -141,10 +182,13 @@
     <!-- modal area end -->
     <!-- all js here -->
     <script src="/Assets/client/js/vendor/jquery-1.12.0.min.js"></script>
+
+    <script src="/Assets/admin/libs/jqueri-ui/jquery-ui.min.js"></script>
     <script src="/Assets/client/js/popper.js"></script>
     <script src="/Assets/client/js/bootstrap.min.js"></script>
     <script src="/Assets/client/js/ajax-mail.js"></script>
     <script src="/Assets/client/js/plugins.js"></script>
     <script src="/Assets/client/js/main.js"></script>
+    <script src="~/Assets/client/js/Common.js"></script>
 </body>
 </html>

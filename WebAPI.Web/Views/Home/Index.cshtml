@@ -3,7 +3,33 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
+@section Sidebar{
+    <div class="sidebar_widget wishlist mb-35">
+        <div class="block_title">
+            <h3><a href="san-pham.html">Sản phẩm có lượt xem nhiều nhất</a></h3>
+        </div>
+        @foreach (var product in Model.HotCountProducts)
+        {
+            var url = "/" + product.Alias + "-" + product.ID + "-p" + ".html";
+            <div class="cart_item">
+                <div class="cart_img">
+                    <a href="@url"><img src="@product.Image" alt="@product.Name"></a>
+                </div>
+                <div class="cart_info">
+                    <a href="@url">@product.Name</a>
+                    <span class="cart_price">$@product.Price</span>
+                    <span class="quantity">Qty: @product.ViewCount</span>
+                </div>
+            </div>
 
+        }
+
+        <div class="block_content">
+            <p>2  products</p>
+            <a href="san-pham-ban-chay.html">» Xem tất cả</a>
+        </div>
+    </div>
+}
 <div class="col-lg-9 col-md-12">
     <!--banner slider start-->
     <div class="banner_slider slider_1">
@@ -26,7 +52,7 @@
     <!--new product area start-->
     <div class="new_product_area">
         <div class="block_title">
-            <h3>New Products</h3>
+            <h3>Sản phẩm mới nhập về</h3>
         </div>
         <div class="row">
             <div class="product_active owl-carousel">

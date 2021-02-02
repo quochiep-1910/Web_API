@@ -1,0 +1,215 @@
+﻿@model WebAPI.Web.Infrastructure.Core.PaginationSet<WebAPI.Web.Models.ProductViewModel>
+
+@{
+    /**/
+
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+    //var category = (WebAPI.Web.Models.ProductCategoryViewModel)ViewBag.Category
+}
+
+<div class="col-lg-9 col-md-12">
+    <!--banner slider start-->
+    <div class="banner_slider mb-35">
+        <img src="/Assets/client/img/banner/bannner10.jpg" alt="">
+    </div>
+    <!--banner slider start-->
+    <!--shop toolbar start-->
+    <div class="shop_toolbar list_toolbar mb-35">
+        <div class="list_button">
+            <ul class="nav" role="tablist">
+                <li>
+                    <a data-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="fa fa-th-large"></i></a>
+                </li>
+                <li>
+                    <a class="active" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fa fa-th-list"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="page_amount">
+            <p>Hiển thị @Model.Page–@Model.TotalPages trong số @Model.TotalCount Kết quả</p>
+        </div>
+        <div class="select_option">
+
+            <form action="#">
+                <label>Sắp xếp theo</label>
+                <select name="orderby" id="short" onchange="location = this.value;">
+                    <option value="?page=@Model.Page&sort=popular">Phổ biến</option>
+                    <option value="?page=@Model.Page&sort=new">Mới</option>
+                    <option value="?page=@Model.Page&sort=discount">Khuyến Mãi</option>
+                    <option value="?page=@Model.Page&sort=price">Giá: Thấp -> Cao </option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <!--shop toolbar end-->
+    <!--shop tab product-->
+    @if (Model.Count > 0)
+    {
+        <div class="shop_tab_product">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade " id="large" role="tabpanel">
+                    <div class="row">
+                        @foreach (var product in Model.Items)
+                        {
+
+                            var url = "/" + product.Alias + "-" + product.ID + "-p" + ".html";
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single_product">
+                                    <div class="product_thumb">
+                                        <a href="@url"><img src="@product.Image" alt=""></a>
+                                        <div class="img_icone">
+                                            <img src="@product.ImageHotTag" alt="">
+                                        </div>
+                                        <div class="product_action">
+                                            <a href="single-product.html"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="product_content">
+                                        <span class="product_price">$@(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N0"))</span>
+                                        <h3 class="product_title"><a href="@url">@product.Name</a></h3>
+                                    </div>
+                                    <div class="product_info">
+                                        <ul>
+                                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="list" role="tabpanel">
+                    @foreach (var product in Model.Items)
+                    {
+                        var url = "/" + product.Alias + "-" + product.ID + "-p" + ".html";
+                        <div class="product_list_item mb-35">
+                            <div class="row align-items-center">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product_thumb">
+                                        <a href="@url"><img src="@product.Image" alt="@product.Name"></a>
+                                        <div class="hot_img">
+                                            <img src="@product.ImageHotTag" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-sm-6">
+                                    <div class="list_product_content">
+                                        <div class="product_ratting">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="list_title">
+                                            <h3><a href="@url">@product.Name</a></h3>
+                                        </div>
+                                        <p class="design">@product.Description </p>
+
+                                        @*<p class="compare">
+                                                <input id="select" type="checkbox">
+                                                <label for="select">Select to compare</label>
+                                            </p>*@
+                                        <div class="content_price">
+                                            <span>$@product.Price.ToString("N0")</span>
+                                            <span class="old-price">$@product.PromotionPrice</span>
+                                        </div>
+                                        <div class="add_links">
+                                            <ul>
+                                                <li><a href="#" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                                                <li><a href="#" title="Thêm vào danh sách yêu thích"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+
+                                                <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Xem nhanh"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (Model.TotalPages > 1)
+            {
+                <!--Create numeric links-->
+                var startPageIndex = Math.Max(1, Model.Page - Model.Maxpage / 2);
+                var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.Maxpage / 2);
+
+                <div class="pagination_style">
+                    <div class="item_page">
+                        <form action="#">
+                            <label for="page_select">show</label>
+                            <select id="page_select">
+                                <option value="">9</option>
+                                <option value="">10</option>
+                                <option value="">11</option>
+                            </select>
+                            <span>Products by page</span>
+                        </form>
+                    </div>
+                    <nav aria-label="Page navigation example">
+
+                        <ul class="pagination">
+                            @if (Model.Page > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1" aria-label="First">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Trang đầu</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=@(Model.Page - 1)" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Trước</span>
+                                    </a>
+                                </li>
+                            }
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (Model.Page == i)
+                                {
+                                    <li class="page-item active"><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
+                                }
+                            }
+                            @if (Model.Page < Model.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=@(Model.Page+1)" aria-label="First">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Sau</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=@Model.TotalPages" aria-label="Previous">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Sau</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+
+            }
+
+            else
+            {
+                <div class="text-center">đã tìm thấy @Model.TotalCount sản phẩm</div>
+            }
+
+            <!--shop tab product end-->
+            <!--pagination style start-->
+        </div>
+    }
+</div>
+
+<!--pagination style end-->

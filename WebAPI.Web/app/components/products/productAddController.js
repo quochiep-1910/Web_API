@@ -23,7 +23,7 @@
             $scope.product.MoreImages = JSON.stringify($scope.moreImages) //gán MoreImages vào scope rồi chuyển sang dạng chuỗi
             apiService.post('/api/product/create', $scope.product,
                 function (result) {
-                    notificationService.displaySuccess(result.data.Name + 'đã thêm mới');
+                    notificationService.displaySuccess(result.data.Name + ' đã thêm mới');
                     $state.go('products');
                 }, function (error) {
                     notificationService.displayError('Thêm mới không thành công');

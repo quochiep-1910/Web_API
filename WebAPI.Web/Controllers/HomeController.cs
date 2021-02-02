@@ -34,13 +34,17 @@ namespace WebAPI.Web.Controllers
             homeViewModel.Slides = slideView;
 
             //product
-            var lastestProductModel = _productService.GetLastest(3);
-            var topSaleProductModel = _productService.GetHotProduct(2);
+            var lastestProductModel = _productService.GetLastest(20);
+            var topSaleProductModel = _productService.GetHotProduct(20);
+            var topHotCount = _productService.GetHotCount(3);
 
             var lastestProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
             var topSaleProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
+            var topHotCountProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topHotCount);
+
             homeViewModel.LastestProducts = lastestProductViewModel;
             homeViewModel.TopSaleProducts = topSaleProductViewModel;
+            homeViewModel.HotCountProducts = topHotCountProductViewModel;
 
             return View(homeViewModel);
         }

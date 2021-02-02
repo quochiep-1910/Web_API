@@ -13,5 +13,6 @@ namespace WebAPI.Web.Models
         public IEnumerable<ProductViewModel> LastestProducts { set; get; }
 
         public IEnumerable<ProductViewModel> TopSaleProducts { set; get; }
+        public IEnumerable<ProductViewModel> HotCountProducts { set; get; }
     }
 }

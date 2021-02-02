@@ -21,7 +21,7 @@
             $scope.product.MoreImages = JSON.stringify($scope.moreImages) //gán MoreImages vào scope rồi chuyển sang dạng chuỗi
             apiService.put('/api/product/update', $scope.product,
                 function (result) {
-                    notificationService.displaySuccess(result.data.Name + 'đã cập nhập thành công');
+                    notificationService.displaySuccess(result.data.Name + ' đã cập nhập thành công');
                     $state.go('products');
                 }, function (error) {
                     notificationService.displayError('cập nhập không thành công');
