@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WebAPI.Common;
 using WebAPI.Model.Models;
 using WebAPI.Service;
@@ -17,7 +18,8 @@ namespace WebAPI.Web.Controllers
         private IProductService _productService;
         private IProductCategoryService _productCategoryService;
 
-        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService
+            )
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
@@ -26,7 +28,46 @@ namespace WebAPI.Web.Controllers
         // GET: Product
         public ActionResult Detail(int id)
         {
-            return View();
+            var productModel = _productService.GetById(id);
+            var viewModel = Mapper.Map<Product, ProductViewModel>(productModel);
+
+            var relatedProduct = _productService.GetRelatedProducts(id, 5);
+            ViewBag.RelatedProduct = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(relatedProduct);
+
+            //list moreImage
+            List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(viewModel.MoreImages);
+            ViewBag.MoreImages = listImages;
+
+            //list tags(mapper)
+            ViewBag.Tags = Mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(_productService.GetListTagByProductId(id));
+
+            //viewcount
+            _productService.IncreaseView(id);
+
+            return View(viewModel);
+        }
+
+        public ActionResult ListByTag(string TagId, int page = 1)
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRow = 0;
+
+            var productModel = _productService.GetListProductByTag(TagId, page, pageSize, out totalRow);
+            var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
+            int totalPage = (int)(Math.Ceiling((double)totalRow / pageSize)); //chuyển đổi sang int rồi làm tròn lên
+
+            ViewBag.Tag = Mapper.Map<Tag, TagViewModel>(_productService.GetTag(TagId));
+
+            var pagiationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewModel,
+                Maxpage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = page,
+
+                TotalCount = totalRow,
+                TotalPages = totalPage
+            };
+            return View(pagiationSet);
         }
 
         public ActionResult Category(int id, int page = 1, string sort = "")

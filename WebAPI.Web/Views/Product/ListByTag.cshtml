@@ -1,9 +1,9 @@
 ﻿@model WebAPI.Web.Infrastructure.Core.PaginationSet<WebAPI.Web.Models.ProductViewModel>
 @{
-    var keyword = (string)ViewBag.Keyword;
-    ViewBag.Title = "Kết quả tìm kiếm của từ " + keyword;
-    Layout = "~/Views/Shared/Layouts.cshtml";
+    var tag = (WebAPI.Web.Models.TagViewModel)ViewBag.Tag;
+    ViewBag.Title = "Kết quả tìm kiếm cho tag" + tag.Name;
 
+    Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
 <div class="col-lg-9 col-md-12">
@@ -25,19 +25,7 @@
             </ul>
         </div>
         <div class="page_amount">
-            <p>Kết quả tìm kiếm: @keyword có @Model.TotalCount Kết quả trùng khớp</p>
-        </div>
-        <div class="select_option">
-
-            <form action="#">
-                <label>Sắp xếp theo</label>
-                <select name="orderby" id="short" onchange="location = this.value;">
-                    <option value="?keyword=@keyword&page=@Model.Page&sort=popular">Phổ biến</option>
-                    <option value="?keyword=@keyword&page=@Model.Page&sort=new">Mới</option>
-                    <option value="?keyword=@keyword&page=@Model.Page&sort=discount">Khuyến Mãi</option>
-                    <option value="?keyword=@keyword&page=@Model.Page&sort=price">Giá: Thấp -> Cao </option>
-                </select>
-            </form>
+            <p>Tag: @tag.Name có @Model.TotalCount Kết quả trùng khớp</p>
         </div>
     </div>
     <!--shop toolbar end-->
@@ -155,13 +143,13 @@
                             @if (Model.Page > 1)
                             {
                                 <li class="page-item">
-                                    <a class="page-link" href="?keyword=@keyword&page=1" aria-label="First">
+                                    <a class="page-link" href="?page=1" aria-label="First">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Trang đầu</span>
                                     </a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="?keyword=@keyword&page=@(Model.Page - 1)" aria-label="Previous">
+                                    <a class="page-link" href="?page=@(Model.Page - 1)" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Trước</span>
                                     </a>
@@ -171,23 +159,23 @@
                             {
                                 if (Model.Page == i)
                                 {
-                                    <li class="page-item active"><a class="page-link" href="?keyword=@keyword&page=@i" title="Trang @i">@i</a></li>
+                                    <li class="page-item active"><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
                                 }
                                 else
                                 {
-                                    <li><a class="page-link" href="?keyword=@keyword&page=@i" title="Trang @i">@i</a></li>
+                                    <li><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
                                 }
                             }
                             @if (Model.Page < Model.TotalPages)
                             {
                                 <li class="page-item">
-                                    <a class="page-link" href="?keyword=@keyword&page=@(Model.Page+1)" aria-label="First">
+                                    <a class="page-link" href="?page=@(Model.Page+1)" aria-label="First">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Sau</span>
                                     </a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="?keyword=@keyword&page=@Model.TotalPages" aria-label="Previous">
+                                    <a class="page-link" href="?page=@Model.TotalPages" aria-label="Previous">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Sau</span>
                                     </a>

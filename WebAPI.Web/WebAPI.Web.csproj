@@ -5916,6 +5916,9 @@
     <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Shared\_Layouts.cshtml" />
+    <Content Include="Views\Product\ListByTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.Common\WebAPI.Common.csproj">

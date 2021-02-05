@@ -1,0 +1,417 @@
+﻿@model WebAPI.Web.Models.ProductViewModel
+
+@{
+
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home/Index">home</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>@Model.Name</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--product wrapper start-->
+<div class="product_details">
+    <div class="row">
+        <div class="col-lg-5 col-md-6">
+            <div class="product_tab fix">
+                <div class="product_tab_button">
+                    <ul class="nav" role="tablist">
+                        @{
+                            var moreImage = (List<string>)ViewBag.MoreImages;
+
+                        }
+                        <li>
+                            <a class="active" data-toggle="tab" href="#@Model.ID" role="tab" aria-controls="@Model.ID" aria-selected="true"><img src="@Model.Image" alt=""></a>
+                        </li>
+                        @foreach (var items in moreImage)
+                        {
+
+                            <li>
+                                <a data-toggle="tab" href="#@Model.ID" role="tab" aria-controls="@Model.ID" aria-selected="false"><img src="@items" alt=""></a>
+                            </li>
+
+                        }
+                    </ul>
+                </div>
+                <div class="tab-content produc_tab_c">
+                    <div class="tab-pane fade show active" id="@Model.ID" role="tabpanel">
+                        <div class="modal_img">
+                            <a href="#"><img src="@Model.Image" alt="@Model.Name"></a>
+                            <div class="img_icone">
+                                <img src="@Model.ImageHotTag" alt="">
+                            </div>
+                            <div class="view_img">
+                                <a class="large_view" href="@Model.Image"><i class="fa fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <div class="product_d_right">
+                <h1>@Model.Name</h1>
+                <div class="product_ratting mb-10">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"> Write a review </a></li>
+                    </ul>
+                </div>
+                <div class="product_desc">
+                    <p>@Model.Description</p>
+                </div>
+
+                <div class="content_price mb-15">
+                    <span>$@Model.Price.ToString("N0")</span>
+                    <span class="old-price">$@Model.PromotionPrice</span>
+                </div>
+                <div class="box_quantity mb-20">
+                    <form action="#">
+                        <label>số lượng</label>
+                        <input min="0" max="100" value="1" type="number">
+                    </form>
+                    <button type="submit"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                    <a href="#" title="thêm vào danh sách yêu thích"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                </div>
+                <div class="product_d_size mb-20">
+                    <label for="group_1">size</label>
+                    <select name="size" id="group_1">
+                        <option value="1">S</option>
+                        <option value="2">M</option>
+                        <option value="3">L</option>
+                    </select>
+                </div>
+
+                <div class="sidebar_widget color">
+                    <h2>Choose Color</h2>
+                    <div class="widget_color">
+                        <ul>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li> <a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product_stock mb-20">
+                    <p>@Model.Quantity mặt hàng</p>
+                    <span> Trong kho </span>
+                </div>
+
+                <div class="wishlist-share">
+                    <h4>Tag: </h4>
+                    <ul>
+                        @foreach (var tag in (IEnumerable<WebAPI.Web.Models.TagViewModel>)ViewBag.Tags)
+                        {
+                            <li><a href="/tag/@(tag.ID).html">@tag.Name</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class=" clearfix"></div>
+                <div class="wishlist-share">
+
+                    <h4>Chia Sẻ:</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--product details end-->
+<!--product info start-->
+<div class="product_d_info">
+    <div class="row">
+        <div class="col-12">
+            <div class="product_d_inner">
+                <div class="product_info_button">
+                    <ul class="nav" role="tablist">
+                        <li>
+                            <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">More info</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Data sheet</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel">
+                        <div class="product_info_content">
+                            <p>@Html.Raw(Model.Content)</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="sheet" role="tabpanel">
+                        <div class="product_d_table">
+                            <form action="#">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="first_child">Compositions</td>
+                                            <td>Polyester</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Styles</td>
+                                            <td>Girly</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Properties</td>
+                                            <td>Short Dress</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="product_info_content">
+                            <p>@Html.Raw(Model.Content)</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                        <div class="product_info_content">
+                            <p>@Html.Raw(Model.Content)</p>
+                        </div>
+                        <div class="product_info_inner">
+                            <div class="product_ratting mb-10">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                                <strong>Posthemes</strong>
+                                <p>09/07/2018</p>
+                            </div>
+                            <div class="product_demo">
+                                <strong>demo</strong>
+                                <p>That's OK!</p>
+                            </div>
+                        </div>
+                        <div class="product_review_form">
+                            <form action="#">
+                                <h2>THÊM MỘT BÀI ĐÁNH GIÁ </h2>
+                                <p>Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh dấu </p>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="review_comment">Đánh giá của bạn </label>
+                                        <textarea name="comment" id="review_comment"></textarea>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="author">Tên</label>
+                                        <input id="author" type="text">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="email">Email </label>
+                                        <input id="email" type="text">
+                                    </div>
+                                </div>
+                                <button type="submit">GỬI ĐI</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--product info end-->
+<!--new product area start-->
+<div class="new_product_area product_page">
+    <div class="row">
+        <div class="col-12">
+            <div class="block_title">
+                <h3>  11 other products category:</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="single_p_active owl-carousel">
+            <div class="col-lg-3">
+                <div class="single_product">
+                    <div class="product_thumb">
+                        <a href="single-product.html"><img src="/Assets/client/product/product1.jpg" alt=""></a>
+                        <div class="img_icone">
+                            <img src="/Assets/client/cart/span-new.png" alt="">
+                        </div>
+                        <div class="product_action">
+                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="product_content">
+                        <span class="product_price">$50.00</span>
+                        <h3 class="product_title"><a href="single-product.html">Curabitur sodales</a></h3>
+                    </div>
+                    <div class="product_info">
+                        <ul>
+                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="single_product">
+                    <div class="product_thumb">
+                        <a href="single-product.html"><img src="/Assets/client/product/product2.jpg" alt=""></a>
+                        <div class="hot_img">
+                            <img src="/Assets/client/cart/span-hot.png" alt="">
+                        </div>
+                        <div class="product_action">
+                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="product_content">
+                        <span class="product_price">$40.00</span>
+                        <h3 class="product_title"><a href="single-product.html">Quisque ornare dui</a></h3>
+                    </div>
+                    <div class="product_info">
+                        <ul>
+                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="single_product">
+                    <div class="product_thumb">
+                        <a href="single-product.html"><img src="/Assets/client/product/product3.jpg" alt=""></a>
+                        <div class="img_icone">
+                            <img src="/Assets/client/cart/span-new.png" alt="">
+                        </div>
+                        <div class="product_action">
+                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="product_content">
+                        <span class="product_price">$60.00</span>
+                        <h3 class="product_title"><a href="single-product.html">Sed non turpiss</a></h3>
+                    </div>
+                    <div class="product_info">
+                        <ul>
+                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="single_product">
+                    <div class="product_thumb">
+                        <a href="single-product.html"><img src="/Assets/client/product/product4.jpg" alt=""></a>
+                        <div class="hot_img">
+                            <img src="/Assets/client/cart/span-hot.png" alt="">
+                        </div>
+                        <div class="product_action">
+                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="product_content">
+                        <span class="product_price">$65.00</span>
+                        <h3 class="product_title"><a href="single-product.html">Duis convallis</a></h3>
+                    </div>
+                    <div class="product_info">
+                        <ul>
+                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="single_product">
+                    <div class="product_thumb">
+                        <a href="single-product.html"><img src="/Assets/client/product/product6.jpg" alt=""></a>
+                        <div class="img_icone">
+                            <img src="/Assets/client/cart/span-new.png" alt="">
+                        </div>
+                        <div class="product_action">
+                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="product_content">
+                        <span class="product_price">$50.00</span>
+                        <h3 class="product_title"><a href="single-product.html">Curabitur sodales</a></h3>
+                    </div>
+                    <div class="product_info">
+                        <ul>
+                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--new product area start-->
+<!--new product area start-->
+<div class="new_product_area product_page">
+    <div class="row">
+        <div class="col-12">
+            <div class="block_title">
+                <h3>Sản phẩm tương tự</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="single_p_active owl-carousel">
+            @{
+                var relatedProducts = (IEnumerable<WebAPI.Web.Models.ProductViewModel>)ViewBag.RelatedProduct;
+            }
+            @foreach (var product in relatedProducts)
+            {
+                <div class="col-lg-3">
+
+                    <div class="single_product">
+                        <div class="product_thumb">
+                            <a href="/@(product.Alias)-@(product.ID)-p.html" ;"><img src="@product.Image" alt="@product.Name"></a>
+                            <div class="img_icone">
+                                <img src="@product.ImageHotTag" alt="">
+                            </div>
+                            <div class="product_action">
+                                <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="product_content">
+                            <span class="product_price">$@product.Price.ToString("N0")</span>
+                            <h3 class="product_title"><a href="single-product.html">@product.Name</a></h3>
+                        </div>
+                        <div class="product_info">
+                            <ul>
+                                <li><a href="#" title=" Add to Wishlist ">Thêm vào danh sách yêu thích</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Xem nhanh">Xem chi tiết</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!--new product area start-->  

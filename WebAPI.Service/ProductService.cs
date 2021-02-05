@@ -29,11 +29,23 @@ namespace WebAPI.Service
 
         IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
 
+        IEnumerable<Product> GetRelatedProducts(int id, int top);
+
         IEnumerable<string> GetListProductByName(string name);
 
         Product GetById(int id);
 
         void Save();
+
+        IEnumerable<Tag> GetListTagByProductId(int id);
+
+        IEnumerable<Tag> GetAllListTag(int top);
+
+        void IncreaseView(int id); //đếm số người vào trang web
+
+        IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, out int totalRow);
+
+        Tag GetTag(string tagId);
     }
 
     public class ProductService : IProductService
@@ -154,6 +166,51 @@ namespace WebAPI.Service
         public IEnumerable<string> GetListProductByName(string name)
         {
             return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(y => y.Name);
+        }
+
+        public IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, out int totalRow)
+        {
+            //Xử lý ProductRepository
+            var model = _productRepository.GetListProductByTag(tagId, page, pageSize, out totalRow);
+
+            return model;
+        }
+
+        public IEnumerable<Tag> GetListTagByProductId(int id)
+        {
+            return _productTagRepository.GetMulti(x => x.ProductID == id, new string[] { "Tag" }).Select(y => y.Tag);
+        }
+
+        ////ListTag
+        public IEnumerable<Tag> GetAllListTag(int top)
+        {
+            //getall for top
+            //var model = _tagRepository.GetAll().Take(top);
+
+            //getall for top ramdom (TagRepository)
+            var model = _tagRepository.GetNameForTag(top);
+            return model;
+        }
+
+        public IEnumerable<Product> GetRelatedProducts(int id, int top)
+        {
+            var product = _productRepository.GetSingleById(id);
+            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == product.CategoryID).OrderByDescending(x => x.CreatedDate).Take(top);
+        }
+
+        public Tag GetTag(string tagId)
+        {
+            return _tagRepository.GetSingleByCondition(x => x.ID == tagId);
+        }
+
+        public void IncreaseView(int id)
+        {
+            var product = _productRepository.GetSingleById(id);
+            if (product.ViewCount.HasValue)
+                product.ViewCount += 1;
+            else
+                product.ViewCount = 1;
+            _unitOfWork.Commit();
         }
 
         public void Save()

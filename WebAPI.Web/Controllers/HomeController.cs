@@ -66,6 +66,9 @@ namespace WebAPI.Web.Controllers
         [ChildActionOnly]
         public ActionResult Category()
         {
+            //list tag
+            ViewBag.ListTag = Mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(_productService.GetAllListTag(5));
+
             var model = _productCategoryService.GetAllByParentId();
             var listProductCategoryViewModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
             return PartialView(listProductCategoryViewModel);
