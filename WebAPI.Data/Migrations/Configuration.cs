@@ -25,6 +25,7 @@
             //  to avoid creating duplicate seed data.
             CreateProductCategorySample(context);
             CreateSlide(context);
+            CreatePage(context);
         }
 
         private void CreateUser(GroceryDbContext context)
@@ -93,6 +94,23 @@
                     new Slide(){Name="Slide 2", DisplayOrder=3,Status=true,Url="#",Image="/Assets/client/img/slider/slider_3.png",Content=@"<h1>Best Collection</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>"}
                 };
                 context.Slides.AddRange(listSlide);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreatePage(GroceryDbContext context)
+        {
+            if (context.Pages.Count() == 0)
+            {
+                var page = new Page()
+                {
+                    Name = "Giới thiệu",
+                    Alias = "gioi-thieu",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend ut quam id sollicitudin. In elementum mauris risus, nec molestie lorem viverra tincidunt. Pellentesque in massa finibus, molestie dolor at, tincidunt mi. Cras non ornare libero. Integer a condimentum dui. Nam scelerisque tempus ultrices. Praesent vulputate sapien eget turpis blandit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean venenatis libero mi, eu consequat sapien scelerisque non. In molestie libero lectus, vitae facilisis metus congue a. Nullam cursus est velit.",
+                    Status = true,
+                    Image = "/Assets/client/img/blog/blog9.jpg"
+                };
+                context.Pages.Add(page);
                 context.SaveChanges();
             }
         }

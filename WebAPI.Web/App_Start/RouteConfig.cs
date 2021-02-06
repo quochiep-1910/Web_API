@@ -10,11 +10,6 @@ namespace WebAPI.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-          name: "About",
-          url: "gioi-thieu.html",
-          defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional }
-      );
-            routes.MapRoute(
         name: "Search",
         url: "tim-kiem.html",
         defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
@@ -24,6 +19,11 @@ namespace WebAPI.Web
    url: "tag/{TagId}.html",
    defaults: new { controller = "Product", action = "ListByTag", TagId = UrlParameter.Optional }
 );
+            routes.MapRoute(
+       name: "Page",
+       url: "trang/{alias}.html",
+       defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional }
+   );
             routes.MapRoute(
             name: "Login",
             url: "dang-nhap.html",

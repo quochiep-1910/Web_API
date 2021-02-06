@@ -20,6 +20,9 @@ namespace WebAPI.Model.Models
         [Required]
         public string Alias { set; get; }
 
+        [MaxLength(256)]
+        public string Image { set; get; }
+
         public string Content { set; get; }
     }
 }
