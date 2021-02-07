@@ -193,6 +193,7 @@
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\HomeController.cs" />
+    <Compile Include="API\PageController.cs" />
     <Compile Include="API\PostCategoryController.cs" />
     <Compile Include="API\ProductCategoryController.cs" />
     <Compile Include="API\ProductController.cs" />
@@ -237,6 +238,13 @@
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\page\pagesAddView.html" />
+    <Content Include="app\components\page\pages.module.js" />
+    <Content Include="app\components\page\pagesAddController.js" />
+    <Content Include="app\components\page\pagesEditController.js" />
+    <Content Include="app\components\page\pagesEditView.html" />
+    <Content Include="app\components\page\pagesListController.js" />
+    <Content Include="app\components\page\pagesListView.html" />
     <Content Include="app\components\products\products.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productAddView.html" />
@@ -5392,7 +5400,7 @@
     <Folder Include="app\shared\navigation\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\plugins\" />
-    <Folder Include="UploadFiles\" />
+    <Folder Include="UploadFiles\Admin\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Post\" />

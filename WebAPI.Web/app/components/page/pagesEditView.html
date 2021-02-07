@@ -1,0 +1,98 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhập Trang</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Trang ></li>
+                    <li><a ui-sref="pages"> Danh sách ></a></li>
+                    <li class="active"> Cập nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Cập nhập {{ pages.Name}}</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <!--novalidate là xoá đi thuộc tính mặc định của form-->
+    <form class="form-horizontal" novalidate name="frmUpdatepages" role="form" ng-submit="Updatepages()">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Trang</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" ng-change="GetSeoTitle()" required name="name" ng-model="pages.Name">
+                    <span ng-show="frmUpdatepages.name.$invalid" class="has-error">Phải nhập tên Trang.</span>
+                    <span ng-show="frmUpdatepages.name.$error.maxlength" class="has-error">Tên Trang vượt quá 256 kí tự</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Alias</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" name="Alias" required ng-model="pages.Alias">
+                    <span ng-show="frmUpdatepages.Alias.$invalid" class="has-error">phải nhập Alias</span>
+                    <span ng-show="frmUpdatepages.Alias.$error.maxlength" class="has-error">Alias vượt quá 256 kí tự</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Hình Ảnh</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" name="Image" ng-model="pages.Image">
+                    <span ng-show="frmUpdatepages.Image.$error.maxlength" class="has-error">Hình Ảnh vượt quá 256 kí tự</span>
+                    <button class="btn btn-default" type="button" ng-click="ChooseImage()">Chọn ảnh</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="Content" ckeditor="ckeditorOptions"
+                              ng-model="pages.Content">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Meta Keyword</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="MetaKeyword" ng-model="pages.MetaKeyword">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Meta Description</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="MetaDescription"
+                              ng-model="pages.MetaDescription">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="status"
+                               ng-model="pages.Status" ng-checked="pages.Status">
+                        <label class="form-check-label" for="exampleCheck2">Kích Hoạt</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" ng-disabled="frmUpdatepages.$invalid" class="btn btn-info">Lưu</button>
+            <button ui-sref="pages" class="btn btn-default float-right">quay lại</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>

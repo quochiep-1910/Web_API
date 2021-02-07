@@ -116,5 +116,24 @@ namespace WebAPI.Web.Infrastructure.Extensions
             product.MetaDescription = productViewModel.MetaDescription;
             product.Status = productViewModel.Status;
         }
+
+        public static void UpdatePage(this Page page, PageViewModel PageViewModel)
+        {
+            page.ID = PageViewModel.ID;
+            page.Name = PageViewModel.Name;
+            page.Alias = PageViewModel.Alias;
+
+            page.Content = PageViewModel.Content;
+            page.Image = PageViewModel.Image;
+
+            page.CreatedDate = PageViewModel.CreatedDate;
+            page.CreatedBy = PageViewModel.CreatedBy;
+            page.UpdatedDate = PageViewModel.UpdatedDate;
+            page.UpdatedBy = PageViewModel.UpdatedBy;
+
+            page.MetaKeyword = PageViewModel.MetaKeyword;
+            page.MetaDescription = PageViewModel.MetaDescription;
+            page.Status = PageViewModel.Status;
+        }
     }
 }

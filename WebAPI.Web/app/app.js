@@ -2,7 +2,7 @@
 
 (function () {
     angular.module('grocery', ['grocery.products', 'grocery.common',
-        'grocery.product_categories'])
+        'grocery.product_categories', 'grocery.pages'])
         .config(config)
         .config(configAuthentication); //check xem mỗi request lên có kèm theo token hay không
 
