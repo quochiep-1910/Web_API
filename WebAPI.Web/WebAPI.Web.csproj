@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ContactDetailViewModel.cs" />
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
@@ -5369,6 +5371,7 @@
     <Content Include="Assets\client\js\ajax-mail.js" />
     <Content Include="Assets\client\js\bootstrap.min.js" />
     <Content Include="Assets\client\js\Common.js" />
+    <Content Include="Assets\client\js\Controller\Contact.js" />
     <Content Include="Assets\client\js\main.js" />
     <Content Include="Assets\client\js\plugins.js" />
     <Content Include="Assets\client\js\popper.js" />
@@ -5403,6 +5406,7 @@
     <Folder Include="UploadFiles\Admin\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\ContactDetail\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
@@ -5930,6 +5934,7 @@
     <Content Include="Views\Shared\_Layouts.cshtml" />
     <Content Include="Views\Product\ListByTag.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.Common\WebAPI.Common.csproj">

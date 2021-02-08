@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebAPI.Model.Models;
 using WebAPI.Service;
 using WebAPI.Web.Models;
@@ -25,6 +26,7 @@ namespace WebAPI.Web.Controllers
         }
 
         // GET: Home
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             //slide
@@ -50,6 +52,7 @@ namespace WebAPI.Web.Controllers
         }
 
         [ChildActionOnly]//không được gọi trực tiếp
+        [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             var footerModel = _commonService.GetFooter();
@@ -64,6 +67,7 @@ namespace WebAPI.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult Category()
         {
             //list tag

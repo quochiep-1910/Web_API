@@ -20,6 +20,11 @@ namespace WebAPI.Web
    defaults: new { controller = "Product", action = "ListByTag", TagId = UrlParameter.Optional }
 );
             routes.MapRoute(
+ name: "Contact",
+ url: "lien-he.html",
+ defaults: new { controller = "Contact", action = "Index", TagId = UrlParameter.Optional }
+);
+            routes.MapRoute(
        name: "Page",
        url: "trang/{alias}.html",
        defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional }

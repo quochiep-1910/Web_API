@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 using WebAPI.Common;
 using WebAPI.Model.Models;
 using WebAPI.Service;
@@ -26,6 +27,7 @@ namespace WebAPI.Web.Controllers
         }
 
         // GET: Product
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
         public ActionResult Detail(int id)
         {
             var productModel = _productService.GetById(id);
@@ -47,6 +49,7 @@ namespace WebAPI.Web.Controllers
             return View(viewModel);
         }
 
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
         public ActionResult ListByTag(string TagId, int page = 1)
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));

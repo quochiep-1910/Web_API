@@ -26,6 +26,7 @@
             CreateProductCategorySample(context);
             CreateSlide(context);
             CreatePage(context);
+            CreateContactDetail(context);
         }
 
         private void CreateUser(GroceryDbContext context)
@@ -111,6 +112,27 @@
                     Image = "/Assets/client/img/blog/blog9.jpg"
                 };
                 context.Pages.Add(page);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateContactDetail(GroceryDbContext context)
+        {
+            if (context.ContactDetails.Count() == 0)
+            {
+                var ContactDetail = new WebAPI.Model.Models.ContactDetail()
+                {
+                    Name = "Shop Thời trang Grocery",
+                    Address = "521/45 Biên Hoà Đồng Nai",
+                    Email = "HiepNguyen@gmail.com",
+                    Lat = 10.954861,
+                    Lng = 106.878934,
+                    Phone = "0995531766",
+                    Website = "",
+                    Other = "",
+                    Status = true,
+                };
+                context.ContactDetails.Add(ContactDetail);
                 context.SaveChanges();
             }
         }
