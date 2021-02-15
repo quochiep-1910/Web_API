@@ -1,5 +1,5 @@
-﻿@model WebAPI.Web.Models.ContactDetailViewModel
-
+﻿@model WebAPI.Web.Models.FeedbackViewModel
+@using BotDetect.Web.Mvc;
 @{
     ViewBag.Title = "Liên Hệ";
     Layout = "~/Views/Shared/_Layouts.cshtml";
@@ -15,9 +15,10 @@
         height: 400px;
     }
 </style>
-<input type="hidden" id="hidAddress" value="@Model.Name <br /> Điện thoại:@Model.Phone <br /> Địa chỉ: @Model.Address" />
-<input type="hidden" id="hidLat" value="@Model.Lat" />
-<input type="hidden" id="hidlng" value="@Model.Lng" />
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+<input type="hidden" id="hidAddress" value="@Model.ContactDetail.Name <br /> Điện thoại:@Model.ContactDetail.Phone <br /> Địa chỉ: @Model.ContactDetail.Address" />
+<input type="hidden" id="hidLat" value="@Model.ContactDetail.Lat" />
+<input type="hidden" id="hidlng" value="@Model.ContactDetail.Lng" />
 <input type="hidden" id="hidName" value="@Model.Name" />
 <div class="breadcrumbs_area">
     <div class="row">
@@ -42,35 +43,45 @@
         <div class="col-lg-6 col-md-12">
             <div class="contact_message">
                 <h3>Thông Tin Liên Hệ</h3>
-                <form id="contact-form" method="POST" action="assets/mail.php">
+                @using (Html.BeginForm("SendFeedback", "Contact", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+                    if (ViewData["SuccessMsg"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <strong>Chúc mừng bạn !</strong> gửi phản hồi thành công.
+                            <br />Chúng tôi sẽ liên hệ lại sớm nhất có thể.
+                        </div>
+                    }
+                   
+
                     <div class="row">
                         <div class="col-lg-6">
-                            <input name="name" placeholder="Tên *" type="text">
+
+                            @Html.TextBoxFor(model => model.Name, new { @name = "name", @placeholder = "Tên *", @type = "text" })
                         </div>
                         <div class="col-lg-6">
-                            <input name="email" placeholder="Email *" type="email">
-                        </div>
-                        <div class="col-lg-6">
-                            <input name="Website" placeholder="Website *" type="text">
-                        </div>
-                        <div class="col-lg-6">
-                            <input name="phone" placeholder="Điện Thoại *" type="text">
-                        </div>
-                        <div class="col-lg-6">
-                            <input name="Address" placeholder="Địa Chỉ *" type="text">
+
+                            @Html.TextBoxFor(model => model.Email, new { @name = "email", @placeholder = "Email ", @type = "email" })
                         </div>
 
                         <div class="col-12">
                             <div class="contact_textarea">
-                                <textarea placeholder="Message *" name="message" class="form-control2"></textarea>
+
+                                @Html.TextAreaFor(model => model.Message, new { @name = "message", @placeholder = "Tin nhắn ", @class = "form-control2" })
                             </div>
-                            <button type="submit"> Gửi </button>
+
+                           @{ MvcCaptcha ContactCaptcha = new MvcCaptcha("ContactCaptcha");}
+                            @Html.Captcha(ContactCaptcha)
+                            @Html.TextBox("CaptchaCode")
+
+                            <input value="Gửi đi" type="submit" class="btn btn-primary" />
                         </div>
-                        <div class="col-12">
-                            <p class="form-messege">
-                        </div>
+                        @*<div class="col-12">
+                                <p class="form-messege">
+                            </div>*@
                     </div>
-                </form>
+                }
             </div>
         </div>
 
@@ -79,9 +90,9 @@
                 <h3>Về chúng tôi</h3>
                 <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas human.</p>
                 <ul>
-                    <li><i class="fa fa-fax"></i>  Address : @Model.Address</li>
-                    <li><i class="fa fa-phone"></i> <a href="#">@Model.Phone</a></li>
-                    <li><i class="fa fa-envelope-o"></i> @Model.Email</li>
+                    <li><i class="fa fa-fax"></i>  Address : @Model.ContactDetail.Address</li>
+                    <li><i class="fa fa-phone"></i> <a href="#">@Model.ContactDetail.Phone</a></li>
+                    <li><i class="fa fa-envelope-o"></i> @Model.ContactDetail.Email</li>
                 </ul>
                 <h3><strong>Giờ Làm Việc</strong></h3>
                 <p><strong>Thứ Hai - Thứ Bảy</strong>:  8AM – 22PM</p>

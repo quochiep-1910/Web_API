@@ -135,5 +135,14 @@ namespace WebAPI.Web.Infrastructure.Extensions
             page.MetaDescription = PageViewModel.MetaDescription;
             page.Status = PageViewModel.Status;
         }
+
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackViewModel)
+        {
+            feedback.Name = feedbackViewModel.Name;
+            feedback.Email = feedbackViewModel.Email;
+            feedback.Message = feedbackViewModel.Message;
+            feedback.Status = feedbackViewModel.Status;
+            feedback.CreateDate = DateTime.Now;
+        }
     }
 }
