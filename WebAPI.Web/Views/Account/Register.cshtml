@@ -1,0 +1,87 @@
+﻿@model WebAPI.Web.Models.RegisterViewModel
+@using BotDetect.Web.Mvc;
+@{
+    /**/
+
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">home</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Đăng nhập & Đăng kí</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- customer login start -->
+<div class="customer_login">
+    <div class="row">
+
+        <!--register area start-->
+        <div class="col-lg-12 col-md-6">
+            <div class="account_form register">
+                <h2>Đăng kí</h2>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    if (ViewData["SuccessMsg"] != null)
+
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <strong>Chúc mừng bạn !</strong> đã đăng kí thành công.
+                            <br />Vui lòng click<a id="Success_register" href="/dang-nhap.html"> vào đây</a> để đăng nhập.
+                        </div>
+                    }
+                    <h3>Thông tin cá nhân</h3>
+                    <p>
+                        <label>Họ Tên  <span>*</span></label>
+                        @Html.TextBoxFor(model => model.FullName)
+                    </p>
+                    <p>
+                        <label>Tên tài khoản <span>*</span></label>
+                        @Html.TextBoxFor(model => model.UserName)
+                    </p>
+                    <p>
+                        <label>Mật khẩu <span>*</span></label>
+                        @Html.PasswordFor(model => model.Password)
+                    </p>
+                    <p>
+                        <label>Địa chỉ Email <span>*</span></label>
+                        @Html.TextBoxFor(model => model.Email)
+                    </p>
+
+                    <p>
+                        <label>Số điện thoại <span>*</span></label>
+                        @Html.TextBoxFor(model => model.PhoneNumber)
+                    </p>
+                    <p>
+                        <label>Địa chỉ liên lạc </label>
+                        @Html.TextBoxFor(model => model.Address)
+                    </p>
+                  
+                    MvcCaptcha registerCaptcha = new MvcCaptcha("RegisterCaptcha");
+                  
+                    @Html.Captcha(registerCaptcha)
+                    @Html.TextBox("CaptchaCode")
+
+                    <div class="login_submit">
+                        <button type="submit">Đăng kí</button>
+                    </div>
+                }
+            </div>
+        </div>
+        <!--register area end-->
+    </div>
+</div>
+<!-- customer login end -->

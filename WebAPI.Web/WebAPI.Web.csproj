@@ -240,6 +240,7 @@
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -5278,6 +5279,7 @@
     <Content Include="Assets\admin\libs\toastr\toastr.min.js" />
     <Content Include="Assets\client\css\bootstrap.min.css" />
     <Content Include="Assets\client\css\bundle.css" />
+    <Content Include="Assets\client\css\custom.css" />
     <Content Include="Assets\client\css\plugin.css" />
     <Content Include="Assets\client\css\responsive.css" />
     <Content Include="Assets\client\css\style.css" />
@@ -5388,6 +5390,7 @@
     <Content Include="Assets\client\js\vendor\jquery-1.12.0.min.js" />
     <Content Include="Assets\client\js\vendor\modernizr-2.8.3.min.js" />
     <Content Include="Assets\client\template\contact_template.html" />
+    <Content Include="Assets\client\template\newuser.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -5416,7 +5419,6 @@
     <Folder Include="Scripts\plugins\" />
     <Folder Include="UploadFiles\Admin\" />
     <Folder Include="Views\About\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\ContactDetail\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>
@@ -5946,6 +5948,7 @@
     <Content Include="Views\Product\ListByTag.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.Common\WebAPI.Common.csproj">

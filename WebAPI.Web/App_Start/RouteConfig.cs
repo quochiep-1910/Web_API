@@ -37,6 +37,11 @@ namespace WebAPI.Web
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
       );
             routes.MapRoute(
+               name: "Register",
+               url: "dang-ki.html",
+               defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }
+     );
+            routes.MapRoute(
                 name: "Product Category",
                 url: "{alias}.pc-{id}.html",
                 defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional }
