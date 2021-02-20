@@ -1,9 +1,11 @@
 ﻿@model WebAPI.Web.Infrastructure.Core.PaginationSet<WebAPI.Web.Models.ProductViewModel>
 @{
-    var tag = (WebAPI.Web.Models.TagViewModel)ViewBag.Tag;
-    ViewBag.Title = "Kết quả tìm kiếm cho tag" + tag.Name;
+                /**/
 
-    Layout = "~/Views/Shared/Layouts.cshtml";
+                var tag = (WebAPI.Web.Models.TagViewModel)ViewBag.Tag;
+                ViewBag.Title = "Kết quả tìm kiếm cho tag" + tag.Name;
+
+                Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
 <div class="col-lg-9 col-md-12">

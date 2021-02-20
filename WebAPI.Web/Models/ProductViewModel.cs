@@ -4,6 +4,7 @@ using WebAPI.Model.Models;
 
 namespace WebAPI.Web.Models
 {
+    [Serializable]
     public class ProductViewModel
     {
         public int ID { set; get; }

@@ -13,5 +13,7 @@ namespace WebAPI.Common
         public const string PostTag = "post";
 
         public const string DefaultFooterId = "Default";
+
+        public const string SessionCart = "SessionCart";
     }
 }

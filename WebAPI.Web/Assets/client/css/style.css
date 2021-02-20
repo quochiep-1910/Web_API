@@ -62,7 +62,7 @@
 }
 
 /* 2.1 header top css here*/
-.switcher > ul, .header_links > ul {
+.switcher > ul, .header_links form > ul {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2598,11 +2598,15 @@
 }
 
 .table_desc table thead tr th.product_remove, .table_desc table thead tr th.product-price, .table_desc table thead tr th.product_total {
-    min-width: 159px;
+    min-width: 100px;
+}
+
+.table_desc table thead tr th.product_STT, .table_desc table thead tr th.product-price, .table_desc table thead tr th.product_total {
+    min-width: 100px;
 }
 
 .table_desc table thead tr th.product_name {
-    min-width: 300px;
+    min-width: 370px;
 }
 
 .table_desc table thead tr th.product_thumb, .table_desc table thead tr th.product_quantity {

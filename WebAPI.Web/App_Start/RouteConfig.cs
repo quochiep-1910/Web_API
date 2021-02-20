@@ -42,6 +42,16 @@ namespace WebAPI.Web
                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }
      );
             routes.MapRoute(
+              name: "Cart",
+              url: "gio-hang.html",
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional }
+    );
+            routes.MapRoute(
+              name: "Checkout",
+              url: "thanh-toan.html",
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional }
+    );
+            routes.MapRoute(
                 name: "Product Category",
                 url: "{alias}.pc-{id}.html",
                 defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional }

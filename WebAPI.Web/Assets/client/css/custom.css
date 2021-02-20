@@ -1,3 +1,30 @@
-﻿.Success_register {
+﻿#Success_register {
     color: red;
+}
+.error {
+    color: red;
+}
+ #dangki {
+    font-size: 12px;
+    height: 29px;
+    line-height: 14px;
+    padding: 8px 6px;
+    margin-right: 1px;
+}
+
+ #dangki {
+    background: #333;
+    border: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    height: 38px;
+    line-height: 18px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-transition: .3s;
+    transition: .3s;
+    margin-right: 20px;
 }

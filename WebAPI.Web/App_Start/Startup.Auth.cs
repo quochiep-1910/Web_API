@@ -27,6 +27,7 @@ namespace WebAPI.Web.App_Start
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
             app.CreatePerOwinContext<UserManager<ApplicationUser>>(CreateManager); // CreatePerOwinContext để quản lý user manager (giảm phụ thuộc service và application)
 
+            //authen token cho admin API
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/oauth/token"), //tất cả đường dẫn đều thông qua cái này
@@ -36,6 +37,22 @@ namespace WebAPI.Web.App_Start
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
+            // cấu hình đăng nhập bằng  cookie MVC
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/dang-nhap.html"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    // Cho phép ứng dụng xác thực tem bảo mật khi người dùng đăng nhập.
+                    /* Đây là một tính năng bảo mật được sử dụng khi bạn thay đổi mật khẩu
+                    hoặc thêm thông tin đăng nhập bên ngoài vào tài khoản của mình. */
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                }
+            });
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

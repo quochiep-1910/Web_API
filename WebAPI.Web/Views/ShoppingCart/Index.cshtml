@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home/Index">Trang Chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Giỏ hàng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--shopping cart area start -->
+<div class="shopping_cart_area cartContent">
+
+    <div class="row">
+        <div class="col-12 ">
+            <div class="table_desc cartContent">
+                <div class="cart_page table-responsive ">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="product_STT">STT</th>
+
+                                <th class="product_thumb">Ảnh sản phẩm</th>
+                                <th class="product_name">Sản phẩm</th>
+                                <th class="product-price">Giá</th>
+                                <th class="product_quantity">Số lượng</th>
+                                <th class="product_total">Tổng giá</th>
+                                <th class="product_remove">Xoá sản phẩm</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartBody"></tbody>
+                    </table>
+                </div>
+                <br />
+
+                <button id="btnContinue" class="btn btn-success float-right" type="submit">Tiếp tục mua hàng </button>
+
+                <button id="btnDeleteAll" class="btn btn-danger float-right" type="submit">Xoá giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+    <!--coupon code area start-->
+    <div class="coupon_area">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code">
+                    <h3>Phiếu mua hàng</h3>
+                    <div class="coupon_inner">
+                        <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
+                        <input placeholder="Mã giảm giá" type="text">
+                        <button type="submit">ÁP DỤNG PHIẾU GIẢM GIÁ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code">
+                    <h3>TỔNG SẢN PHẨM</h3>
+                    <div class="coupon_inner">
+                        <div class="cart_subtotal">
+                            <p>Tổng tiền sản phẩm</p>
+                            <p class="cart_amount"><span id="lblTotalOrder">£</span></p>
+                        </div>
+                        <div class="cart_subtotal ">
+                            <p>Phí giao hàng</p>
+                            <p class="cart_amount"><span id="lblTotalShipped">£</span></p>
+                        </div>
+                        <a href="#">Phí vận chuyển</a>
+
+                        <div class="cart_subtotal">
+                            <p>Tổng</p>
+                            <p class="cart_amount"><span id="lblTotal">£</span></p>
+                        </div>
+                        <div class="checkout_btn">
+                            <a id="btnCheckout" href="#">TIẾN HÀNH THANH TOÁN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--coupon code area end-->
+
+    <div id="divCheckout" style="display:none;">
+        <div class="Checkout_section">
+            <div class="checkout_form">
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <form method="post" id="frmPayment">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <label>
+                                    <input type="checkbox" id="chkUserLoginInfo" />
+                                    Sử dụng thông tin đăng nhập
+                                </label>
+                            }
+
+                            <h3>CHI TIẾT THANH TOÁN</h3>
+                            <div class="row">
+
+                                <div class="col-lg-12 mb-30">
+                                    <label>Họ Tên <span>*</span></label>
+                                    <input type="text" name="name" id="txtName">
+                                </div>
+
+                                <div class="col-12 mb-30">
+                                    <label>Địa chỉ  <span>*</span></label>
+                                    <input placeholder="số nhà, phường, thành phố, tỉnh" type="text" name="address" id="txtAddress">
+                                </div>
+
+                                <div class="col-lg-6 mb-30">
+                                    <label>Số điện thoại<span>*</span></label>
+                                    <input type="text" placeholder="+83" name="phone" id="txtPhone">
+                                </div>
+                                <div class="col-lg-6 mb-30">
+                                    <label> Email<span>*</span></label>
+                                    <input type="text" placeholder="abc@gmail.com" name="email" id="txtEmail">
+                                </div>
+                                <textarea value="" id="txtMessage" placeholder="Message"></textarea>
+                                <div class="payment_method">
+                                    <div class="order_button">
+                                        <button type="button" id="btnCreateOrder">Thanh Toán</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shopping cart area end -->
+
+<script id="tplCart" type="x-tmpl-mustache">
+    <tr>
+        <td class="product_STT">{{ProductId}}</td>
+        <td class="product_thumb"><a href="#"><img src="{{Image}}" alt=""></a></td>
+        <td class="product_name"><a href="#">{{ProductName}}</a></td>
+        <td class="product-price">£{{Price}}</td>
+        <td class="product_quantity"><input class="txtQuantity" data-price="{{Price}}" data-id="{{ProductId}}" min="0" max="100" value="{{Quantity}}" type="number"></td>
+        <td class="product_total" id="amout_{{ProductId}}">£{{Amount}}</td>
+        <td class="product_remove btnDeleteItem" data-id="{{ProductId}}"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+    </tr>
+</script>

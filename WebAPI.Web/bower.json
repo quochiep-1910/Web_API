@@ -14,6 +14,8 @@
     "ng-ckeditor": "~0.2.1",
     "angular-local-stroage": "~0.7.1",
     "angular-loading-bar": "~0.9.0",
-    "jqueri-ui": "~1.12.1"
+    "jqueri-ui": "~1.12.1",
+    "mustache": "~4.1.0",
+    "jquery-validation": "~1.19.3"
   }
 }

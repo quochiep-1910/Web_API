@@ -1,4 +1,5 @@
-﻿<div class="header_area">
+﻿@using Microsoft.AspNet.Identity
+<div class="header_area">
     <!--header top-->
     <div class="header_top">
         <div class="row align-items-center">
@@ -25,14 +26,32 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="header_links">
+                    @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
+                    {
                     <ul>
-                        <li><a href="/lien-he.html" title="Contact">Liên Hệ</a></li>
-                        <li><a href="wishlist.html" title="wishlist">My wishlist</a></li>
-                        <li><a href="my-account.html" title="My account">Tài Khoản của bạn</a></li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+
+                            @Html.AntiForgeryToken()
+
+                            <li><a href="wishlist.html" title="wishlist">My wishlist</a></li>
+                            <li><a href="/tai-khoan.html" title="My account">Xin Chào: @User.Identity.GetUserName()</a></li>
+                            <li><a href="#" id="btnLogout">Đăng Xuất</a></li>
+                        }
+
+                        else
+                        {
+
+                            <li><a href="/dang-nhap.html" title="Login">Đăng Nhập</a></li>
+                            <li><a href="/dang-ki.html" title="register">Đăng Kí</a></li>
+                            
+                        }
                         <li><a href="/gio-hang.html" title="My cart">Giỏ Hàng</a></li>
-                        <li><a href="/dang-nhap.html" title="Login">Đăng Nhập</a></li>
-                        <li><a href="/dang-ki.html" title="register">Đăng Kí</a></li>
+                        <li><a href="/lien-he.html" title="Contact">Liên Hệ</a></li>
+
                     </ul>
+                    }
                 </div>
             </div>
         </div>
@@ -44,7 +63,7 @@
             <!--logo start-->
             <div class="col-lg-3 col-md-3">
                 <div class="logo">
-                    <a href="index.html"><img src="/Assets/client/img/logo/logo.jpg.png" alt=""></a>
+                    <a href="/Home/Index"><img src="/Assets/client/img/logo/logo.jpg.png" alt=""></a>
                 </div>
             </div>
             <!--logo end-->

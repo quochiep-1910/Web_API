@@ -1,0 +1,56 @@
+﻿@model WebAPI.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">home</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Đăng nhập</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- customer login start -->
+<div class="customer_login">
+    <div class="row">
+        <!--login area start-->
+        <div class="col-lg-12 col-md-6">
+            <div class="account_form">
+                <h2>Đăng nhập</h2>
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    <p>
+                        <label>Tài khoản<span>*</span></label>
+
+                        @Html.TextBoxFor(model => model.UserName)
+                    </p>
+                    <p>
+                        <label>Passwords <span>*</span></label>
+
+                        @Html.PasswordFor(model => model.Password)
+                    </p>
+                    <div class="login_submit">
+                        <button type="submit">Đăng Nhập</button>
+                        <label for="remember">
+                            @Html.CheckBoxFor(model => model.RememberMe, new { @id = "remember" })
+                            Nhớ mật khẩu
+                        </label>
+                        <a href="#">Quên mật khẩu?</a>
+                    </div>
+                    <br />
+                    <label class="text-center">Nếu bạn chưa có tài khoản vui lòng đăng kí tại đây: </label><a id="dangki" href="/dang-ki.html"> ĐĂNG KÍ THÀNH VIÊN </a>
+                }
+            </div>
+        </div>
+        <!--login area start-->
+    </div>
+</div>
+<!-- customer login end -->

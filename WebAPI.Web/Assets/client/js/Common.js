@@ -23,17 +23,19 @@
             },
             select: function (event, ui) {
                 $("#txtKeyword").val(ui.item.label);
-              
 
                 return false;
             }
         })
             .autocomplete("instance")._renderItem = function (ul, item) {
                 return $("<li>")
-                    .append("<div>" + item.label +  "</div>")
+                    .append("<div>" + item.label + "</div>")
                     .appendTo(ul);
             };
-    
+        $('#btnLogout').off('click').on('click', function (e) {
+            e.preventDefault();
+            $('#frmLogout').submit();
+        });
     }
 }
 common.init();

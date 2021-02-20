@@ -86,7 +86,7 @@
                         <label>số lượng</label>
                         <input min="0" max="100" value="1" type="number">
                     </form>
-                    <button type="submit"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                    <button type="submit" class="btnAddToCart" data-id="@Model.ID"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
                     <a href="#" title="thêm vào danh sách yêu thích"><i class="fa fa-heart" aria-hidden="true"></i></a>
                 </div>
                 <div class="product_d_size mb-20">
@@ -259,7 +259,7 @@
                             <img src="/Assets/client/cart/span-new.png" alt="">
                         </div>
                         <div class="product_action">
-                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                            <a href="#" id="btnAddToCart" data-id="@Model.ID"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                     <div class="product_content">
@@ -395,7 +395,8 @@
                                 <img src="@product.ImageHotTag" alt="">
                             </div>
                             <div class="product_action">
-                                <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+
+                                <a href="#" class="btnAddToCart" data-id="@product.ID"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
                             </div>
                         </div>
                         <div class="product_content">

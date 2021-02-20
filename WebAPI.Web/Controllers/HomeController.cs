@@ -26,7 +26,7 @@ namespace WebAPI.Web.Controllers
         }
 
         // GET: Home
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             //slide
@@ -67,7 +67,6 @@ namespace WebAPI.Web.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
         public ActionResult Category()
         {
             //list tag
