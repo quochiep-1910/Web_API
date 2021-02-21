@@ -13,7 +13,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         //phương thức Seed này khởi tạo dữ liệu mẫu khi chúng ta chạy khởi tạo ứng dựng

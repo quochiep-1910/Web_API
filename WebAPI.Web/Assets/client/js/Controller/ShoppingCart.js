@@ -4,7 +4,7 @@
         cart.registerEvent();
     },
     registerEvent: function () {
-        $('#frmPayment').validate({
+        $("#frmPayment").validate({
             //ràng buộc
             rules: {
                 name: "required",
@@ -17,6 +17,7 @@
                     required: true,
                     number: true
                 },
+            },
                 messages: {
                     name: "Yêu cầu nhập tên",
                     address: "Yêu cầu nhập địa chỉ",
@@ -29,7 +30,6 @@
                         number: "Số điện thoại phải là số."
                     }
                 }
-            }
         });
         $('.btnAddToCart').off('click').on('click', function (e) {
             e.preventDefault();

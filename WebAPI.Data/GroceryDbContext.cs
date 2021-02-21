@@ -36,6 +36,15 @@ namespace WebAPI.Data
         public DbSet<ContactDetail> ContactDetails { set; get; }
         public DbSet<Feedback> Feedbacks { set; get; }
 
+        //phân quyền
+        public DbSet<ApplicationGroup> ApplicationGroups { set; get; }
+
+        public DbSet<ApplicationRole> ApplicationRoles { set; get; }
+
+        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }
+
+        public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
+
         public static GroceryDbContext Create()
         {
             return new GroceryDbContext();
@@ -48,13 +57,11 @@ namespace WebAPI.Data
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             //thêm key cho entity
-            //builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
-            //builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
-            //builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
-            //builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
-
-            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
-            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+            //đổi tên bảng
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
+            builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
+            builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
         }
     }
 }

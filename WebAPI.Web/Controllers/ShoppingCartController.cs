@@ -78,7 +78,7 @@ namespace WebAPI.Web.Controllers
             if (Request.IsAuthenticated)
             {
                 orderNew.CustomerId = User.Identity.GetUserId();
-                orderNew.CustomerId = User.Identity.GetUserName();
+                orderNew.CreatedBy = User.Identity.GetUserName();
             }
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
