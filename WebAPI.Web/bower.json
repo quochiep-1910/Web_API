@@ -16,6 +16,7 @@
     "angular-loading-bar": "~0.9.0",
     "jqueri-ui": "~1.12.1",
     "mustache": "~4.1.0",
-    "jquery-validation": "~1.19.3"
+    "jquery-validation": "~1.19.3",
+    "checklist-model": "~1.0.0"
   }
 }

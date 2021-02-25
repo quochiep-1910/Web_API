@@ -72,7 +72,12 @@ namespace WebAPI.Service
             return _applicationGroupRepository.Delete(appGroup);
         }
 
-        public IEnumerable<ApplicationGroup> GetAll(int page, int pageSize, out int totalRow, string filter)
+        public IEnumerable<ApplicationGroup> GetAll()
+        {
+            return _applicationGroupRepository.GetAll();
+        }
+
+        public IEnumerable<ApplicationGroup> GetAll(int page, int pageSize, out int totalRow, string filter = null)
         {
             var query = _applicationGroupRepository.GetAll();
             if (!String.IsNullOrEmpty(filter))
@@ -81,11 +86,6 @@ namespace WebAPI.Service
             }
             totalRow = query.Count();
             return query.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);
-        }
-
-        public IEnumerable<ApplicationGroup> GetAll()
-        {
-            return _applicationGroupRepository.GetAll();
         }
 
         public ApplicationGroup GetDetail(int id)

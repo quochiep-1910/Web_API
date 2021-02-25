@@ -69,7 +69,12 @@ namespace WebAPI.Service
             _appRoleRepository.DeleteMulti(x => x.Id == id);
         }
 
-        public IEnumerable<ApplicationRole> GetAll(int page, int pageSize, out int totalRow, string filter)
+        public IEnumerable<ApplicationRole> GetAll()
+        {
+            return _appRoleRepository.GetAll();
+        }
+
+        public IEnumerable<ApplicationRole> GetAll(int page, int pageSize, out int totalRow, string filter = null)
         {
             var query = _appRoleRepository.GetAll();
             if (!string.IsNullOrEmpty(filter))
@@ -77,11 +82,6 @@ namespace WebAPI.Service
 
             totalRow = query.Count();
             return query.OrderBy(x => x.Description).Skip(page * pageSize).Take(pageSize);
-        }
-
-        public IEnumerable<ApplicationRole> GetAll()
-        {
-            return _appRoleRepository.GetAll();
         }
 
         public ApplicationRole GetDetail(string id)

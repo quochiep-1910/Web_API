@@ -205,6 +205,8 @@
   <ItemGroup>
     <Compile Include="API\AccountController.cs" />
     <Compile Include="API\ApplicationGroupController.cs" />
+    <Compile Include="API\ApplicationRoleController.cs" />
+    <Compile Include="API\ApplicationUserController.cs" />
     <Compile Include="API\HomeController.cs" />
     <Compile Include="API\PageController.cs" />
     <Compile Include="API\PostCategoryController.cs" />
@@ -217,6 +219,20 @@
     <Content Include="app\components\application_groups\applicationGroupEditView.html" />
     <Content Include="app\components\application_groups\applicationGroupListView.html" />
     <Content Include="app\components\application_groups\applicationGroupListController.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddController.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddView.html" />
+    <Content Include="app\components\application_roles\applicationRoleEditController.js" />
+    <Content Include="app\components\application_roles\applicationRoleEditView.html" />
+    <Content Include="app\components\application_roles\applicationRoleListController.js" />
+    <Content Include="app\components\application_roles\applicationRoleListView.html" />
+    <Content Include="app\components\application_roles\applicationRoles.module.js" />
+    <Content Include="app\components\application_users\applicationUserAddController.js" />
+    <Content Include="app\components\application_users\applicationUserAddView.html" />
+    <Content Include="app\components\application_users\applicationUserEditController.js" />
+    <Content Include="app\components\application_users\applicationUserEditView.html" />
+    <Content Include="app\components\application_users\applicationUserListController.js" />
+    <Content Include="app\components\application_users\applicationUserListView.html" />
+    <Content Include="app\components\application_users\applicationUsers.module.js" />
     <Content Include="app\components\home\rootController.js" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -293,8 +309,10 @@
     <Content Include="app\components\product_categories\producteCategoryListController.js" />
     <Content Include="app\components\ReadMe.txt" />
     <Content Include="app\Readme.txt" />
+    <Content Include="app\shared\directives\asDataDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDiretive.js" />
+    <Content Include="app\shared\directives\readme.txt" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\modules\grocery.common.js" />
     <Content Include="app\shared\modules\readme.txt" />
@@ -670,6 +688,8 @@
     <Content Include="Assets\admin\libs\bootstrap\site\_layouts\examples.html" />
     <Content Include="Assets\admin\libs\bootstrap\site\_layouts\home.html" />
     <Content Include="Assets\admin\libs\bootstrap\site\_layouts\simple.html" />
+    <Content Include="Assets\admin\libs\checklist-model\checklist-model.js" />
+    <Content Include="Assets\admin\libs\checklist-model\LICENSE.txt" />
     <Content Include="Assets\admin\libs\ckeditor\.npm\assets\ckeditor4.png" />
     <Content Include="Assets\admin\libs\ckeditor\adapters\jquery.js" />
     <Content Include="Assets\admin\libs\ckeditor\ckeditor.js" />
@@ -5838,6 +5858,7 @@
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\admin\libs\checklist-model\test\" />
     <Folder Include="Assets\admin\libs\mustache\test\spec\" />
     <Folder Include="Scripts\plugins\" />
     <Folder Include="UploadFiles\Admin\" />
@@ -6468,6 +6489,11 @@
     <Content Include="Assets\admin\libs\jquery-validation\package.json" />
     <Content Include="Assets\admin\libs\jquery-validation\README.md" />
     <Content Include="Assets\admin\libs\jquery-validation\validation.jquery.json" />
+    <Content Include="Assets\admin\libs\checklist-model\.bower.json" />
+    <Content Include="Assets\admin\libs\checklist-model\bower.json" />
+    <Content Include="Assets\admin\libs\checklist-model\checklist-model.nuspec" />
+    <Content Include="Assets\admin\libs\checklist-model\package-lock.json" />
+    <Content Include="Assets\admin\libs\checklist-model\readme.md" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

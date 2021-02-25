@@ -1,39 +1,40 @@
 ﻿(function (app) {
+    'use strict';
     app.controller('applicationGroupAddController', applicationGroupAddController);
 
-    applicationGroupAddController.$inject = ['$scope', 'apiService', 'notificationService', '$state', 'commonService'];
-    //$state dùng để điều hướng
-    function applicationGroupAddController($scope, apiService, notificationService, $state, commonService) {
-        $scope.productCategory = {
-            CreatedDate: new Date(),
-            Status: true
+    applicationGroupAddController.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'commonService'];
+
+    function applicationGroupAddController($scope, apiService, notificationService, $location, commonService) {
+        $scope.group = {
+            ID: 0,
+            Roles: []
         }
 
-        $scope.AddProductCategory = AddProductCategory;
-        $scope.GetSeoTitle = GetSeoTitle;
+        $scope.AddAppGroup = AddAppGroup;
 
-        function GetSeoTitle() {
-            //tự động chuyển name thành alias
-            $scope.productCategory.Alias = commonService.getSeoTitle($scope.productCategory.Name);
+        function AddAppGroup() {
+            apiService.post('/api/applicationGroup/add', $scope.group, addSuccessed, addFailed);
         }
-        function AddProductCategory() {
-            apiService.post('/api/productcategory/create', $scope.productCategory,
-                function (result) {
-                    notificationService.displaySuccess(result.data.Name + 'đã thêm mới');
-                    $state.go('product_categories');
-                }, function (error) {
-                    notificationService.displayError('Thêm mới không thành công');
+
+        function addSuccessed() {
+            notificationService.displaySuccess($scope.group.Name + ' đã được thêm mới.');
+
+            $location.url('application_groups');
+        }
+        function addFailed(response) {
+            notificationService.displayError(response.data.Message);
+            notificationService.displayErrorValidation(response);
+        }
+        function loadRoles() {
+            apiService.get('/api/applicationRole/getlistall',
+                null,
+                function (response) {
+                    $scope.roles = response.data;
+                }, function (response) {
+                    notificationService.displayError('Không tải được danh sách quyền.');
                 });
         }
-        function loadParentCategory() {
-            //gọi api getallparents ko truyền tham số
-            apiService.get('/api/productcategory/getallparents', null, function (result) {
-                $scope.parentCategories = result.data; // nhận kết quả trả về từ api
-            }, function () {
-                //false
-                console.log('Cannot get list parent');
-            });
-        }
-        loadParentCategory();
+
+        loadRoles();
     }
 })(angular.module('grocery.application_groups'));

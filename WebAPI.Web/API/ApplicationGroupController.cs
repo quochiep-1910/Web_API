@@ -18,7 +18,6 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/applicationGroup")]
-    [Authorize]
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;
@@ -44,8 +43,7 @@ namespace WebAPI.Web.API
                 HttpResponseMessage response = null;
                 int totalRow = 0;
                 var model = _appGroupService.GetAll(page, pageSize, out totalRow, filter);
-                IEnumerable<ApplicationGroupViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationGroup>,
-                    IEnumerable<ApplicationGroupViewModel>>(model);
+                IEnumerable<ApplicationGroupViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationGroup>, IEnumerable<ApplicationGroupViewModel>>(model);
                 PaginationSet<ApplicationGroupViewModel> pagedSet = new PaginationSet<ApplicationGroupViewModel>()
                 {
                     Page = page,

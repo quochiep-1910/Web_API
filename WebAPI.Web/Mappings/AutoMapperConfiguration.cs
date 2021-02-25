@@ -24,9 +24,10 @@ namespace WebAPI.Web.Mappings
                 cfg.CreateMap<Slide, SlideViewModel>();
                 cfg.CreateMap<Page, PageViewModel>();
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>();
-                //cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
-                //cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
-                //cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
+
+                cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
+                cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
+                cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
             });
         }
     }

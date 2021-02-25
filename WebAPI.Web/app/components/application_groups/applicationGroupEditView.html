@@ -3,14 +3,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Cập Nhập danh mục: {{productCategory.Name}}</h1>
+                <h1>Cập nhật nhóm</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Sản phẩm</li>
-                    <li><a ui-sref="product_categories">Danh mục</a></li>
-                    <li class="active">Cập Nhập</li>
+                    <li class="breadcrumb-item"><a href="/admin">Trang chủ ></a></li>
+                    <li><a ui-sref="categories">Danh mục nhóm ></a></li>
+                    <li class="active"><a href="#">Cập nhật ></a></li>
                 </ol>
             </div>
         </div>
@@ -20,98 +19,32 @@
 <!-- Main content -->
 <div class="card card-info">
     <div class="card-header">
-        <h3 class="card-title">{{productCategory.Name}}</h3>
+        <h3 class="card-title">{{group.Name}}</h3>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
     <!--novalidate là xoá đi thuộc tính mặc định của form-->
-    <form class="form-horizontal" novalidate name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()">
+    <form class="form-horizontal" novalidate name="frmUpdateAppGroup" role="form" ng-submit="updateApplicationGroup()">
         <div class="card-body">
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Danh Mục</label>
+
+            <div class="form-group row" ng-class="{ 'has-error' : frmUpdateAppGroup.name.$invalid && !frmUpdateAppGroup.name.$pristine }">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tên danh mục</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-maxlength="256" ng-change="GetSeoTitle()" required name="name" ng-model="productCategory.Name">
-                    <span ng-show="frmUpdateProductCategory.name.$invalid" class="has-error">Phải nhập tên danh mục.</span>
-                    <span ng-show="frmUpdateProductCategory.name.$error.maxlength" class="has-error">Tên danh mục vượt quá 256 kí tự</span>
+                    <input type="text" name="name" class="form-control"
+                           required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Tiêu Đề SEO</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-maxlength="256" required name="Alias" ng-model="productCategory.Alias">
-                    <span ng-show="frmUpdateProductCategory.Alias.$invalid" class="has-error">phải nhập tiêu đề SEO</span>
-                    <span ng-show="frmUpdateProductCategory.Alias.$error.maxlength" class="has-error">Tiêu đề SEO vượt quá 256 kí tự</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Mô Tả Ngắn</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-maxlength="500" name="Description" ng-model="productCategory.Description">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Danh Mục Cha</label>
-                <div class="col-sm-10">
-                    <select class="form-control" name="parentId" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
-                        Danh mục cha
-                        <option value="">-- chọn danh mục cha --</option>
-                    </select>
-                    <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
-                </div>
+                <label ng-repeat="role in roles" class="col-sm-2 col-form-label">
+                    <input type="checkbox" checklist-model="group.Roles" checklist-value="role"> {{role.Description}}
+                </label>
             </div>
 
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Thứ tự hiện thị</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" required name="DisplayOrder" ng-model="productCategory.DisplayOrder">
-                    <span ng-show="frmUpdateProductCategory.DisplayOrder.$invalid" class="has-error">phải nhập thứ tự</span>
-                </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmUpdateAppGroup.$invalid" class="btn btn-info">Lưu</button>
+                <button ui-sref="application_groups" class="btn btn-default float-right">Hủy bỏ</button>
             </div>
-
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Hình Ảnh</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-maxlength="256" name="Image" ng-model="productCategory.Image">
-                    <span ng-show="frmUpdateProductCategory.Image.$error.maxlength" class="has-error">Hình Ảnh vượt quá 256 kí tự</span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Meta Keyword</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="MetaKeyword" ng-model="productCategory.MetaKeyword">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Meta Description</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" name="MetaDescription"
-                              ng-model="productCategory.MetaDescription">
-                    </textarea>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="offset-sm-2 col-sm-10">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="status"
-                               ng-model="productCategory.Status" ng-checked="productCategory.Status">
-                        <label class="form-check-label" for="exampleCheck2">Kích Hoạt</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="HomeFlag"
-                               ng-model="productCategory.HomeFlag" ng-checked="productCategory.HomeFlag">
-                        <label class="form-check-label" for="exampleCheck2">Hiện Thị Trang Chủ</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <button type="submit" ng-disabled="frmUpdateProductCategory.$invalid" class="btn btn-info">Lưu</button>
-            <button ui-sref="product_categories" class="btn btn-default float-right">quay lại</button>
         </div>
         <!-- /.card-footer -->
     </form>

@@ -1,8 +1,14 @@
 ﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('grocery', ['grocery.products', 'grocery.common',
-        'grocery.product_categories', 'grocery.pages'])
+    angular.module('grocery',
+        ['grocery.products',
+            'grocery.application_groups',
+            'grocery.product_categories',
+            'grocery.application_roles',
+            'grocery.pages',
+            'grocery.application_users',
+            'grocery.common'])
         .config(config)
         .config(configAuthentication); //check xem mỗi request lên có kèm theo token hay không
 

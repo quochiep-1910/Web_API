@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('grocery.common', ['ui.router', 'ngBootbox', 'ngCkeditor', 'LocalStorageModule']) //add các lib vào đây
+    angular.module('grocery.common', ['ui.router', 'ngBootbox', 'ngCkeditor', 'checklist-model', 'LocalStorageModule']) //add các lib vào đây
 })();
