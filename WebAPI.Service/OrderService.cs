@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebAPI.Common.ViewModels;
 using WebAPI.Data.Infrastructure;
 using WebAPI.Data.Repositories;
 using WebAPI.Model.Models;
@@ -41,7 +42,7 @@ namespace WebAPI.Service
                     orderDetail.OrderID = order.ID;
                     _orderDetailRepository.Add(orderDetail);
                 }
-                _unitOfWork.Commit();
+
                 return true;
             }
             catch (Exception ex)

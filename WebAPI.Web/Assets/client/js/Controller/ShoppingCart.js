@@ -18,18 +18,18 @@
                     number: true
                 },
             },
-                messages: {
-                    name: "Yêu cầu nhập tên",
-                    address: "Yêu cầu nhập địa chỉ",
-                    email: {
-                        required: "Bạn cần nhập email",
-                        email: "Định dạng email chưa đúng"
-                    },
-                    phone: {
-                        required: "Số điện thoại được yêu cầu",
-                        number: "Số điện thoại phải là số."
-                    }
+            messages: {
+                name: "Yêu cầu nhập tên",
+                address: "Yêu cầu nhập địa chỉ",
+                email: {
+                    required: "Bạn cần nhập email",
+                    email: "Định dạng email chưa đúng"
+                },
+                phone: {
+                    required: "Số điện thoại được yêu cầu",
+                    number: "Số điện thoại phải là số."
                 }
+            }
         });
         $('.btnAddToCart').off('click').on('click', function (e) {
             e.preventDefault();
@@ -72,7 +72,7 @@
         });
         $('#btnCheckout').off('click').on('click', function (e) {
             e.preventDefault();
-            $('#divCheckout').show();
+            $('#divCheckout').toggle();
         });
         $('#chkUserLoginInfo').off('click').on('click', function (e) {
             if ($(this).prop('checked'))
@@ -169,6 +169,9 @@
             success: function (response) {
                 if (response.status) {
                     alert('Thêm sản phẩm thành công');
+                }
+                else {
+                    alert(response.messages);
                 }
             }
         });

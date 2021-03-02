@@ -146,7 +146,7 @@ namespace WebAPI.Web.API
         {
             if (ModelState.IsValid)
             {
-                var appUser = await _userManager.FindByIdAsync(applicationUserViewModel.Id);
+                var appUser = await _userManager.FindByIdAsync(applicationUserViewModel.Id); //lấy ra user
                 try
                 {
                     appUser.UpdateUser(applicationUserViewModel);

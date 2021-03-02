@@ -1,0 +1,124 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thống kê</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin">Home </a></li>
+                    <li class="breadcrumb-item active">Thống kê</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Doanh Thu
+                        </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content p-0">
+                            <!-- Morris chart - Sales -->
+                            <!--<div class="chart tab-pane active" id="revenue-chart"
+                            style="position: relative; height: 500px;"></div>-->
+                            <canvas id="bar" class="chart chart-bar"
+                                    chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+
+            <section class="col-lg-5 connectedSortable">
+
+                <!-- Map card -->
+                <div class="card ">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            Dữ liệu Thống Kê
+                        </h3>
+
+                        <div class="card-tools">
+                            <button type="button"
+                                    class="btn btn-primary btn-sm"
+                                    title="Lọc ngày">
+                                <i id="btnfilter" class="far fa-calendar-alt"></i>
+                            </button>
+
+                            <div id="divfilter" style="display:none;">
+                                <form novalidate name="frmloadData" role="form" ng-submit="loadData()">
+                                    <div class="daterangepicker">
+                                        Từ ngày
+                                        <div class="ranges">
+                                            <!--<input type="datetime-local"
+                                            value="2018-06-12"
+                                            min="2000-06-07T00:00" max="2030-12-14T00:00">-->
+                                            <input type="text" ng-model="from.fromDate" />
+                                        </div>
+                                        Đến ngày
+                                        <div class="ranges">
+                                            <!--<input type="datetime-local"
+                                            value="2018-06-12"
+                                            min="2000-06-07T00:00" max="2030-12-14T00:00">-->
+                                            <input type="text" ng-model="from.toDate" />
+                                        </div>
+                                        <!--<button type="submit" id="btnLoadform" ng-disabled="frmloadData.$invalid">Lọc</button>-->
+                                        <input id="btnLoadform" type="submit" ng-disabled="frmloadData.$invalid" class="btn btn-info" value="Lọc" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- card tools -->
+                    <!-- /.card-tools -->
+                    <div class="card-body">
+                        <div id="world-map" style="height: 500px; width: 100%;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Ngày</td>
+                                        <td>Doanh Số</td>
+                                        <td>Lợi Nhuận</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in tabledata">
+                                        <td>
+                                            {{item.Date | date}}
+                                        </td>
+                                        <td>
+                                            {{item.Revenues | number}}
+                                        </td>
+                                        <td>
+                                            {{item.Benefit |number}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card-body-->
+                </div>
+                <!-- /.card -->
+            </section>
+            <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>

@@ -46,6 +46,8 @@ namespace WebAPI.Service
         IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, out int totalRow);
 
         Tag GetTag(string tagId);
+
+        bool SellProduct(int productId, int quantity);
     }
 
     public class ProductService : IProductService
@@ -267,6 +269,16 @@ namespace WebAPI.Service
                     _productTagRepository.Add(productTag);
                 }
             }
+        }
+
+        //bán sản phẩm
+        public bool SellProduct(int productId, int quantity)
+        {
+            var product = _productRepository.GetSingleById(productId);
+            if (product.Quantity < quantity)
+                return false;
+            product.Quantity -= quantity;
+            return true;
         }
     }
 }

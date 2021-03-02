@@ -8,6 +8,7 @@
             'grocery.application_roles',
             'grocery.pages',
             'grocery.application_users',
+            'grocery.statistic',
             'grocery.common'])
         .config(config)
         .config(configAuthentication); //check xem mỗi request lên có kèm theo token hay không
