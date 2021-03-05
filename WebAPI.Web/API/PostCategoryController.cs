@@ -11,8 +11,8 @@ using WebAPI.Web.Models;
 
 namespace WebAPI.Web.API
 {
-    [Authorize]
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         private IPostCategoryService _postCategoryService;

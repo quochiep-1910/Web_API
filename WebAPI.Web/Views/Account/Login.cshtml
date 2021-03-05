@@ -25,7 +25,7 @@
         <div class="col-lg-12 col-md-6">
             <div class="account_form">
                 <h2>Đăng nhập</h2>
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     <p>
                         <label>Tài khoản<span>*</span></label>
@@ -45,10 +45,16 @@
                         </label>
                         <a href="#">Quên mật khẩu?</a>
                     </div>
-                    <br />
+
                     <label class="text-center">Nếu bạn chưa có tài khoản vui lòng đăng kí tại đây: </label><a id="dangki" href="/dang-ki.html"> ĐĂNG KÍ THÀNH VIÊN </a>
                 }
             </div>
+            @*@Html.Partial("_ExternalLoginListPartial", new WebAPI.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+        </div>
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new WebAPI.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
         </div>
         <!--login area start-->
     </div>

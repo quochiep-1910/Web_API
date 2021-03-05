@@ -32,10 +32,12 @@
             }
 
             this.logOut = function () { //xoá token
-                authenticationService.removeToken();
-                authData.authenticationData.IsAuthenticated = false;
-                authData.authenticationData.userName = "";
-                authData.authenticationData.accessToken = "";
+                apiService.post('/api/account/logout', null, function (response) {
+                    authenticationService.removeToken();
+                    authData.authenticationData.IsAuthenticated = false;
+                    authData.authenticationData.userName = "";
+                    authData.authenticationData.accessToken = "";
+                }, null);
             }
         }]);
 })(angular.module('grocery.common'));

@@ -1,4 +1,5 @@
-﻿/// <reference path="../plugins/angular/angular.js" />
+﻿/// <reference path="../../assets/admin/libs/angular/angular.js" />
+
 var MyApp = angular.module('myModule', []);
 
 MyApp.controller("myController", myController);
@@ -6,8 +7,8 @@ MyApp.controller("myController1", myController);
 
 //myController.$inject = ['$scope'];
 function myController($rootScope, $scope) {
-	$rootScope.message = "This is ";
+    $rootScope.message = "This is ";
 }
 function myController1($scope) {
-	$scope.message = "This is abc ";
+    $scope.message = "This is abc ";
 }

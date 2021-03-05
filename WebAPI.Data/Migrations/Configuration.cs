@@ -27,6 +27,8 @@
             CreateSlide(context);
             CreatePage(context);
             CreateContactDetail(context);
+            CreateFooter(context);
+            CreateUser(context);
         }
 
         private void CreateUser(GroceryDbContext context)
@@ -42,21 +44,24 @@
                 BirthDay = DateTime.Now,
                 FullName = "Nguyen Quoc Hiep"
             };
-            //password User
-            manager.Create(user, "quochieps@2");
-
-            //nếu role chưa tồn tại thì tạo 2 role Admin và user
-            if (!roleManager.Roles.Any())
+            if (manager.Users.Count(x => x.UserName == "Grocery") == 0)
             {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
+                //password User
+                manager.Create(user, "quochieps@2");
+
+                //nếu role chưa tồn tại thì tạo 2 role Admin và user
+                if (!roleManager.Roles.Any())
+                {
+                    roleManager.Create(new IdentityRole { Name = "Admin" });
+                    roleManager.Create(new IdentityRole { Name = "User" });
+                }
+
+                //tìm user admin thông qua Email
+                var adminUser = manager.FindByEmail("hiepgakute1111@gmail.com");
+
+                //nếu thành công thì có giá trị và add admin và user
+                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
             }
-
-            //tìm user admin thông qua Email
-            var adminUser = manager.FindByEmail("hiepgakute1111@gmail.com");
-
-            //nếu thành công thì có giá trị và add admin và user
-            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
 
         private void CreateProductCategorySample(WebAPI.Data.GroceryDbContext context)
@@ -80,7 +85,27 @@
         {
             if (context.Footers.Count(x => x.ID == CommonConstants.DefaultFooterId) == 0)
             {
-                string content = "";
+                /*
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer_widget">
+                            <h3>About us</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="footer_widget_contect">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i>  19 Interpro Road Madison, AL 35758, USA</p>
+
+                                <p><i class="fa fa-mobile" aria-hidden="true"></i> (012) 234 432 3568</p>
+                                <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact@plazathemes.com </a>
+                            </div>
+                        </div>
+                    </div>
+                 */
+                string content = "Footer";
+                context.Footers.Add(new Footer()
+                {
+                    ID = CommonConstants.DefaultFooterId,
+                    Content = content
+                });
+                context.SaveChanges();
             }
         }
 
