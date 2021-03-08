@@ -1,11 +1,13 @@
 ﻿@model WebAPI.Web.Infrastructure.Core.PaginationSet<WebAPI.Web.Models.ProductViewModel>
 
 @{
-    /**/
+    var category = (WebAPI.Web.Models.ProductCategoryViewModel)ViewBag.Category;
 
-    ViewBag.Title = "Category";
+    ViewBag.Title = category.Name;
+    //ViewBag.MetaDescription = category.MetaDescription;
+    //ViewBag.MetaKeyword = category.MetaKeyword;
     Layout = "~/Views/Shared/Layouts.cshtml";
-    <!--var category = (WebAPI.Web.Models.ProductCategoryViewModel)ViewBag.Category-->
+
 }
 
 <div class="col-lg-9 col-md-12">

@@ -8,7 +8,7 @@
             CreatedDate: new Date(),
             Status: true
         }
-
+        $scope.flatFolders=[];
         $scope.AddProductCategory = AddProductCategory;
         $scope.GetSeoTitle = GetSeoTitle;
 
@@ -28,12 +28,35 @@
         function loadParentCategory() {
             //gọi api getallparents ko truyền tham số
             apiService.get('/api/productcategory/getallparents', null, function (result) {
-                $scope.parentCategories = result.data; // nhận kết quả trả về từ api
+                $scope.parentCategories = commonService.getTree(result.data, "ID", "ParentID"); // nhận kết quả trả về từ api
+                $scope.parentCategories.forEach(function (item) {
+                    recur(item, 0, $scope.flatFolders);
+                });
             }, function () {
                 //false
                 console.log('Cannot get list parent');
             });
         }
+        function times(n, str) {
+            var result = '';
+            for (var i = 0; i < n; i++) {
+                result += str;
+            }
+            return result;
+        };
+        function recur(item, level, arr) {
+            arr.push({
+                Name: times(level, '-') + ' ' + item.Name,
+                ID: item.ID,
+                Level: level,
+                Indent: times(level, '-')
+            });
+            if (item.children) {
+                item.children.forEach(function (item) {
+                    recur(item, level + 1, arr);
+                });
+            }
+        };
         loadParentCategory();
     }
 })(angular.module('grocery.product_categories'));

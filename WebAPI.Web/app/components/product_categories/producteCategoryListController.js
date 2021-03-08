@@ -94,6 +94,7 @@
                     pageSize: 10
                 }
             }
+            $scope.loading = true;
             apiService.get('/api/productcategory/getall', config, function (result) { //dùng apiService để gọi
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không có bản ghi nào được tìm thấy.');
@@ -105,6 +106,7 @@
                 $scope.page = result.data.Page;                  //nhận giá trị tự api/productcategory/getall
                 $scope.pagesCount = result.data.TotalPages;        //nhận giá trị tự api/productcategory/getall
                 $scope.totalCount = result.data.TotalCount;      //nhận giá trị tự api/productcategory/getall
+                $scope.loading = false;
             }, function () {
                 console.log('Tải danh mục sản phẩm không thành công.'); //ghi log
             })

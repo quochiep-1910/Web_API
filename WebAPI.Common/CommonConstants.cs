@@ -15,5 +15,7 @@ namespace WebAPI.Common
         public const string DefaultFooterId = "Default";
 
         public const string SessionCart = "SessionCart";
+
+        public const string Administrator = "Administrator";
     }
 }

@@ -5,7 +5,8 @@
 
     function commonService() {
         return {
-            getSeoTitle: getSeoTitle
+            getSeoTitle: getSeoTitle,
+            getTree: getTree
         }
         function getSeoTitle(input) {
             if (input == undefined || input == '')

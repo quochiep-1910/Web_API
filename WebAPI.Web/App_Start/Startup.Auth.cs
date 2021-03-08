@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,8 +10,11 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using WebAPI.Common;
 using WebAPI.Data;
 using WebAPI.Model.Models;
+using WebAPI.Service;
+using WebAPI.Web.Infrastructure.Core;
 
 [assembly: OwinStartup(typeof(WebAPI.Web.App_Start.Startup))]
 
@@ -113,25 +117,25 @@ namespace WebAPI.Web.App_Start
                 }
                 if (user != null) //đăng nhập thành công
                 {
-                    //var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
-                    //var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
-                    //if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
-                    //{
-                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                   user,
-                                   DefaultAuthenticationTypes.ExternalBearer);
-                    context.Validated(identity);
-                    //}
-                    //else
-                    //{
-                    //    context.Rejected();
-                    //    context.SetError("invalid_group", "Bạn không phải là admin");
-                    //}
+                    var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>(); //dùng class ServiceFactory gọi DI mà không qua Controller
+                    var listGroup = applicationGroupService.GetListGroupByUserId(user.Id); //lấy ra user thuộc group Administrator
+                    if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
+                    {
+                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                               user,
+                               DefaultAuthenticationTypes.ExternalBearer);
+                        context.Validated(identity);
+                    }
+                    else
+                    {
+                        context.Rejected();
+                        context.SetError("invalid_group", "Bạn không phải là admin");
+                    }
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.'");
                     context.Rejected();
+                    context.SetError("invalid_group", "Tài khoản hoặc mật khẩu không đúng.");
                 }
             }
         }
