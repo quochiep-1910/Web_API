@@ -24,6 +24,8 @@ namespace WebAPI.Service
 
         ProductCategory GetById(int id);
 
+        bool ChangeStatus(int id);
+
         void Save();
     }
 
@@ -43,6 +45,11 @@ namespace WebAPI.Service
 
         {
             return _ProductCategoryRepository.Add(ProductCategory);
+        }
+
+        public bool ChangeStatus(int id)
+        {
+            return _ProductCategoryRepository.ChangeStatus(id);
         }
 
         public ProductCategory Delete(int id)

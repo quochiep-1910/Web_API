@@ -15,7 +15,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/productcategory")]
-    [Authorize]
+    //[Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         private IProductCategoryService _productCategoryService;
@@ -68,7 +68,6 @@ namespace WebAPI.Web.API
 
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryViewModel)
         {
             return CreateHttpResponse(request, () =>
@@ -144,7 +143,6 @@ namespace WebAPI.Web.API
 
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -171,7 +169,6 @@ namespace WebAPI.Web.API
 
         [Route("deletenulti")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
         {
             return CreateHttpResponse(request, () =>
@@ -195,6 +192,20 @@ namespace WebAPI.Web.API
                     response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
                 }
 
+                return response;
+            });
+        }
+
+        [HttpPut]
+        [Route("changestatus")]
+        public HttpResponseMessage ChangeStatus(HttpRequestMessage request, int id) //id trong Models.EF.User truyền kiểu gì thì truyền y như vậy
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var result = _productCategoryService.ChangeStatus(id);
+                response = request.CreateResponse(HttpStatusCode.OK, result);
+                _productCategoryService.Save();
                 return response;
             });
         }

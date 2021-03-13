@@ -53,7 +53,6 @@ namespace WebAPI.Web.API
 
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, PageViewModel pagesViewModel)
         {
             return CreateHttpResponse(request, () =>
@@ -153,7 +152,6 @@ namespace WebAPI.Web.API
 
         [Route("deletenulti")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedPages)
         {
             return CreateHttpResponse(request, () =>

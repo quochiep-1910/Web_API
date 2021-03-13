@@ -17,7 +17,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/applicationUser")]
-    [Authorize]
+    //[Authorize]
     public class ApplicationUserController : ApiControllerBase
     {
         private ApplicationUserManager _userManager;

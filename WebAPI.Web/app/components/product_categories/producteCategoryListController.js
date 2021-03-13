@@ -15,6 +15,7 @@
         $scope.search = search;
         $scope.deleteProductCategory = deleteProductCategory;
         $scope.selectAll = selectAll;
+        
 
         $scope.deleteMultiple = deleteMultiple;
 
@@ -79,6 +80,21 @@
                 })
             });
         }
+
+        //function ChangeStatus(id) {
+        //    var config = {
+        //        params: {
+        //            id: id
+        //        }
+        //    }
+
+        //    apiService.put('/api/productcategory/changestatus', config, function () {
+        //        notificationService.displaySuccess('Xoá thành công');
+        //        search();
+        //    }, function () {
+        //        notificationService.displayError('Xoá không thành công');
+        //    });
+        //}
 
         function search() {
             getProductCategories();

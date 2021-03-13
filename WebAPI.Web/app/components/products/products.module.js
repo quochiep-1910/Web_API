@@ -20,6 +20,11 @@
             parent: 'base',
             templateUrl: "/app/components/products/productEditView.html",
             controller: "productEditController" //nó tự chạy js controller này
+        }).state('product_import', { //khai báo cho đường dẫn admin và dùng controller
+            url: "/product_import", //trỏ tới url này thì nó chuyển vào view html bên dưới
+            templateUrl: "/app/components/products/productImportView.html",
+            parent: 'base',
+            controller: "productImportController" //nó tự chạy js controller này
         });
     }
 })(); 
