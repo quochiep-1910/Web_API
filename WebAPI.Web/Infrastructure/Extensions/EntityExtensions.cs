@@ -146,6 +146,12 @@ namespace WebAPI.Web.Infrastructure.Extensions
             feedback.CreateDate = DateTime.Now;
         }
 
+        public static void UpdateFooter(this Footer footer, FooterViewModel footerViewModel)
+        {
+            footer.ID = footerViewModel.ID;
+            footer.Content = footerViewModel.Content;
+        }
+
         public static void UpdateOrder(this Order order, OrderViewModel orderViewModel)
         {
             order.CustomerName = orderViewModel.CustomerName;

@@ -18,6 +18,8 @@ namespace WebAPI.Data.Infrastructure
 
         T Delete(int id);
 
+        T Delete(string id);
+
         //Delete multi records
         void DeleteMulti(Expression<Func<T, bool>> where);
 

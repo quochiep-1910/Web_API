@@ -7,6 +7,8 @@
             'grocery.product_categories',
             'grocery.application_roles',
             'grocery.pages',
+            'grocery.feedbacks',
+            'grocery.footers',
             'grocery.application_users',
             'grocery.statistic',
             'grocery.common'])

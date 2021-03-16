@@ -1,0 +1,53 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm mới footer</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">footer ></li>
+                    <li><a ui-sref="footers"> Danh sách ></a></li>
+                    <li class="active"> Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Thêm mới</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <!--novalidate là xoá đi thuộc tính mặc định của form-->
+    <form class="form-horizontal" novalidate name="frmAddfooters" role="form" ng-submit="Addfooters()">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Nhập ID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" required name="ID" ng-model="footers.ID">
+                    <span ng-show="frmAddfooters.ID.$invalid" class="has-error">Phải nhập tên ID.</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Nội dung </label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="Content" ckeditor="ckeditorOptions"
+                              ng-model="footers.Content">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" ng-disabled="frmAddfooters.$invalid" class="btn btn-info">Lưu</button>
+            <button ui-sref="footers" class="btn btn-default float-right">quay lại</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>
