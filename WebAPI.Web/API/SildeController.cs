@@ -14,15 +14,15 @@ using WebAPI.Web.Models;
 
 namespace WebAPI.Web.API
 {
-    [RoutePrefix("api/footer")]
-    [Authorize]
-    public class FooterController : ApiControllerBase
+    [RoutePrefix("api/slide")]
+    public class SildeController : ApiControllerBase
     {
-        private IFooterService _footerService;
+        private ISlideService _sildeService;
 
-        public FooterController(IErrorService errorService, IFooterService footerService) : base(errorService)
+        //xuất lỗi khi cần và lấy dữ liệu từ database
+        public SildeController(IErrorService errorService, ISlideService sildeService) : base(errorService)
         {
-            this._footerService = footerService;
+            this._sildeService = sildeService;
         }
 
         [Route("getall")]
@@ -32,13 +32,13 @@ namespace WebAPI.Web.API
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _footerService.GetAll(keyword);//lấy về toàn bộ số bản ghi và từ khoá tìm kiếm
+                var model = _sildeService.GetAll(keyword);//lấy về toàn bộ số bản ghi và từ khoá tìm kiếm
 
                 totalRow = model.Count(); //đếm
                 var query = model.OrderByDescending(x => x.ID).Skip(page * pageSize).Take(pageSize);
-                var reponseData = Mapper.Map<IEnumerable<Footer>, IEnumerable<FooterViewModel>>(query); //lấy giữ liệu thông qua mapper và duyệt từng phần từ
+                var reponseData = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(query); //lấy giữ liệu thông qua mapper và duyệt từng phần từ
 
-                var paginationSet = new PaginationSet<FooterViewModel>()
+                var paginationSet = new PaginationSet<SlideViewModel>()
                 {
                     Items = reponseData,
                     Page = page,
@@ -52,7 +52,7 @@ namespace WebAPI.Web.API
 
         [Route("create")]
         [HttpPost]
-        public HttpResponseMessage Create(HttpRequestMessage request, FooterViewModel footerViewModel)
+        public HttpResponseMessage Create(HttpRequestMessage request, SlideViewModel slideViewModel)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -64,13 +64,13 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var newpages = new Footer();
-                    newpages.UpdateFooter(footerViewModel);
+                    var newslide = new Slide();
+                    newslide.UpdateSlide(slideViewModel);
 
-                    _footerService.Add(newpages);
-                    _footerService.Save();
+                    _sildeService.Add(newslide);
+                    _sildeService.Save();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(newpages);
+                    var responseData = Mapper.Map<Slide, SlideViewModel>(newslide);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -78,15 +78,15 @@ namespace WebAPI.Web.API
             });
         }
 
-        [Route("getbyid/{id}")]
+        [Route("getbyid/{id:int}")]
         [HttpGet]
-        public HttpResponseMessage GetById(HttpRequestMessage request, string id)
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
-                Footer model = _footerService.GetSingleByString(id);
+                var model = _sildeService.GetById(id);
 
-                var reponseData = Mapper.Map<Footer, FooterViewModel>(model); //lấy giữ liệu thông qua mapper
+                var reponseData = Mapper.Map<Slide, SlideViewModel>(model); //lấy giữ liệu thông qua mapper
 
                 var response = request.CreateResponse(HttpStatusCode.OK, reponseData);
                 return response;
@@ -95,7 +95,7 @@ namespace WebAPI.Web.API
 
         [Route("update")]
         [HttpPut]
-        public HttpResponseMessage Update(HttpRequestMessage request, FooterViewModel footerViewModel)
+        public HttpResponseMessage Update(HttpRequestMessage request, SlideViewModel slideViewModel)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -107,13 +107,13 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    Footer dbPages = _footerService.GetSingleByString(footerViewModel.ID);
-                    dbPages.UpdateFooter(footerViewModel);
+                    var dbSlide = _sildeService.GetById(slideViewModel.ID);
+                    dbSlide.UpdateSlide(slideViewModel);
 
-                    _footerService.Update(dbPages);
-                    _footerService.Save();
+                    _sildeService.Update(dbSlide);
+                    _sildeService.Save();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(dbPages);
+                    var responseData = Mapper.Map<Slide, SlideViewModel>(dbSlide);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -123,7 +123,7 @@ namespace WebAPI.Web.API
 
         [Route("delete")]
         [HttpDelete]
-        public HttpResponseMessage Delete(HttpRequestMessage request, string id)
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -135,11 +135,11 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var oldProduct = _footerService.Delete(id); //xoá dữ liệu cũ
+                    var oldProduct = _sildeService.Delete(id); //xoá dữ liệu cũ
 
-                    _footerService.Save();
+                    _sildeService.Save();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(oldProduct);
+                    var responseData = Mapper.Map<Slide, SlideViewModel>(oldProduct);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -161,15 +161,15 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var listFooter = new JavaScriptSerializer().Deserialize<List<string>>(checkedPages);// huỷ dữ liệu số
-                    foreach (var item in listFooter)
+                    var listSlides = new JavaScriptSerializer().Deserialize<List<int>>(checkedPages);// huỷ dữ liệu số
+                    foreach (var item in listSlides)
                     {
-                        _footerService.Delete(item.ToString()); //xoá dữ liệu cũ
+                        _sildeService.Delete(item); //xoá dữ liệu cũ
                     }
 
-                    _footerService.Save();
+                    _sildeService.Save();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listFooter.Count);
+                    response = request.CreateResponse(HttpStatusCode.OK, listSlides.Count);
                 }
 
                 return response;

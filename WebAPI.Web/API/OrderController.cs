@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,15 @@ using WebAPI.Web.Models;
 
 namespace WebAPI.Web.API
 {
-    [RoutePrefix("api/footer")]
-    [Authorize]
-    public class FooterController : ApiControllerBase
+    [RoutePrefix("api/order")]
+    public class OrderController : ApiControllerBase
     {
-        private IFooterService _footerService;
+        private IOrderService _orderService;
 
-        public FooterController(IErrorService errorService, IFooterService footerService) : base(errorService)
+        //xuất lỗi khi cần và lấy dữ liệu từ database
+        public OrderController(IErrorService errorService, IOrderService orderService) : base(errorService)
         {
-            this._footerService = footerService;
+            this._orderService = orderService;
         }
 
         [Route("getall")]
@@ -32,13 +33,13 @@ namespace WebAPI.Web.API
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _footerService.GetAll(keyword);//lấy về toàn bộ số bản ghi và từ khoá tìm kiếm
+                var model = _orderService.GetAll(keyword);//lấy về toàn bộ số bản ghi và từ khoá tìm kiếm
 
                 totalRow = model.Count(); //đếm
                 var query = model.OrderByDescending(x => x.ID).Skip(page * pageSize).Take(pageSize);
-                var reponseData = Mapper.Map<IEnumerable<Footer>, IEnumerable<FooterViewModel>>(query); //lấy giữ liệu thông qua mapper và duyệt từng phần từ
+                var reponseData = Mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(query); //lấy giữ liệu thông qua mapper và duyệt từng phần từ
 
-                var paginationSet = new PaginationSet<FooterViewModel>()
+                var paginationSet = new PaginationSet<OrderViewModel>()
                 {
                     Items = reponseData,
                     Page = page,
@@ -52,7 +53,7 @@ namespace WebAPI.Web.API
 
         [Route("create")]
         [HttpPost]
-        public HttpResponseMessage Create(HttpRequestMessage request, FooterViewModel footerViewModel)
+        public HttpResponseMessage Create(HttpRequestMessage request, OrderViewModel orderViewModel)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -64,13 +65,17 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var newpages = new Footer();
-                    newpages.UpdateFooter(footerViewModel);
+                    var neworder = new Order();
+                    neworder.UpdateOrder(orderViewModel);
+                    neworder.CreatedDate = DateTime.Now;
 
-                    _footerService.Add(newpages);
-                    _footerService.Save();
+                    neworder.CustomerId = User.Identity.GetUserId();
+                    neworder.CreatedBy = User.Identity.GetUserName();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(newpages);
+                    _orderService.Add(neworder);
+                    _orderService.Save();
+
+                    var responseData = Mapper.Map<Order, OrderViewModel>(neworder);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -78,15 +83,15 @@ namespace WebAPI.Web.API
             });
         }
 
-        [Route("getbyid/{id}")]
+        [Route("getbyid/{id:int}")]
         [HttpGet]
-        public HttpResponseMessage GetById(HttpRequestMessage request, string id)
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
-                Footer model = _footerService.GetSingleByString(id);
+                var model = _orderService.GetById(id);
 
-                var reponseData = Mapper.Map<Footer, FooterViewModel>(model); //lấy giữ liệu thông qua mapper
+                var reponseData = Mapper.Map<Order, OrderViewModel>(model); //lấy giữ liệu thông qua mapper
 
                 var response = request.CreateResponse(HttpStatusCode.OK, reponseData);
                 return response;
@@ -95,7 +100,7 @@ namespace WebAPI.Web.API
 
         [Route("update")]
         [HttpPut]
-        public HttpResponseMessage Update(HttpRequestMessage request, FooterViewModel footerViewModel)
+        public HttpResponseMessage Update(HttpRequestMessage request, OrderViewModel orderViewModel)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -107,13 +112,14 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    Footer dbPages = _footerService.GetSingleByString(footerViewModel.ID);
-                    dbPages.UpdateFooter(footerViewModel);
+                    var dbOrder = _orderService.GetById(orderViewModel.ID);
+                    dbOrder.UpdateOrder(orderViewModel);
+                    dbOrder.CreatedDate = DateTime.Now;
 
-                    _footerService.Update(dbPages);
-                    _footerService.Save();
+                    _orderService.Update(dbOrder);
+                    _orderService.Save();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(dbPages);
+                    var responseData = Mapper.Map<Order, OrderViewModel>(dbOrder);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -123,7 +129,7 @@ namespace WebAPI.Web.API
 
         [Route("delete")]
         [HttpDelete]
-        public HttpResponseMessage Delete(HttpRequestMessage request, string id)
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -135,11 +141,11 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var oldProduct = _footerService.Delete(id); //xoá dữ liệu cũ
+                    var oldProduct = _orderService.Delete(id); //xoá dữ liệu cũ
 
-                    _footerService.Save();
+                    _orderService.Save();
 
-                    var responseData = Mapper.Map<Footer, FooterViewModel>(oldProduct);
+                    var responseData = Mapper.Map<Order, OrderViewModel>(oldProduct);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
@@ -161,15 +167,15 @@ namespace WebAPI.Web.API
                 }
                 else
                 {
-                    var listFooter = new JavaScriptSerializer().Deserialize<List<string>>(checkedPages);// huỷ dữ liệu số
-                    foreach (var item in listFooter)
+                    var listPages = new JavaScriptSerializer().Deserialize<List<int>>(checkedPages);// huỷ dữ liệu số
+                    foreach (var item in listPages)
                     {
-                        _footerService.Delete(item.ToString()); //xoá dữ liệu cũ
+                        _orderService.Delete(item); //xoá dữ liệu cũ
                     }
 
-                    _footerService.Save();
+                    _orderService.Save();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, listFooter.Count);
+                    response = request.CreateResponse(HttpStatusCode.OK, listPages.Count);
                 }
 
                 return response;

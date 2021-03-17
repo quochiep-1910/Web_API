@@ -7,6 +7,8 @@
             'grocery.product_categories',
             'grocery.application_roles',
             'grocery.pages',
+            'grocery.slides',
+            'grocery.orders',
             'grocery.feedbacks',
             'grocery.footers',
             'grocery.application_users',

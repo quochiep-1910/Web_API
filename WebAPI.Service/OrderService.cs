@@ -13,6 +13,20 @@ namespace WebAPI.Service
     public interface IOrderService
     {
         bool Create(Order order, List<OrderDetail> orderDetails);
+
+        Order Add(Order order);
+
+        void Update(Order order);
+
+        Order Delete(int id);
+
+        IEnumerable<Order> GetAll();
+
+        IEnumerable<Order> GetAll(string keyword);
+
+        Order GetById(int id);
+
+        void Save();
     }
 
     public class OrderService : IOrderService
@@ -49,6 +63,44 @@ namespace WebAPI.Service
             {
                 throw;
             }
+        }
+
+        public Order Add(Order order)
+        {
+            return _orderRepository.Add(order);
+        }
+
+        public Order Delete(int id)
+        {
+            return _orderRepository.Delete(id);
+        }
+
+        public IEnumerable<Order> GetAll()
+        {
+            return _orderRepository.GetAll();
+        }
+
+        public IEnumerable<Order> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))//so sánh khác rỗng (nên dùng cái này thay cho [keyword !=null]
+                return _orderRepository.GetMulti(x => x.CustomerName.Contains(keyword));
+            else
+                return _orderRepository.GetAll();
+        }
+
+        public Order GetById(int id)
+        {
+            return _orderRepository.GetSingleById(id);
+        }
+
+        public void Save()
+        {
+            _unitOfWork.Commit();
+        }
+
+        public void Update(Order order)
+        {
+            _orderRepository.Update(order);
         }
     }
 }
