@@ -10,7 +10,6 @@ using WebAPI.Model.Models;
 
 namespace WebAPI.Service
 {
-    //Quản lý chung footer  và slide
     public interface ICommonService
     {
         Footer GetFooter();

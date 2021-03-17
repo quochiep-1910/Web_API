@@ -146,18 +146,6 @@ namespace WebAPI.Web.Infrastructure.Extensions
             feedback.CreateDate = DateTime.Now;
         }
 
-        public static void UpdateSlide(this Slide slide, SlideViewModel slideViewModel)
-        {
-            slide.Name = slideViewModel.Name;
-            slide.Description = slideViewModel.Description;
-            slide.Image = slideViewModel.Image;
-            slide.Url = slideViewModel.Url;
-            slide.DisplayOrder = slideViewModel.DisplayOrder;
-
-            slide.Status = slideViewModel.Status;
-            slide.Content = slideViewModel.Content;
-        }
-
         public static void UpdateFooter(this Footer footer, FooterViewModel footerViewModel)
         {
             footer.ID = footerViewModel.ID;

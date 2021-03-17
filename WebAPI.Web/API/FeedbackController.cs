@@ -15,7 +15,6 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/feedback")]
-    [Authorize]
     public class FeedbackController : ApiControllerBase
     {
         private IFeedbackService _feedbackService;
@@ -67,7 +66,6 @@ namespace WebAPI.Web.API
                     var newfeedbacks = new Feedback();
                     newfeedbacks.UpdateFeedback(feedbackViewModel);
                     newfeedbacks.CreateDate = DateTime.Now;
-                    newfeedbacks.Status = false;
 
                     _feedbackService.Create(newfeedbacks);
                     _feedbackService.Save();
