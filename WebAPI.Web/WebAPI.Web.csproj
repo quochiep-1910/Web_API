@@ -225,6 +225,7 @@
     <Compile Include="API\FeedbackController.cs" />
     <Compile Include="API\FooterController.cs" />
     <Compile Include="API\HomeController.cs" />
+    <Compile Include="API\OrderController.cs" />
     <Compile Include="API\PageController.cs" />
     <Compile Include="API\PostCategoryController.cs" />
     <Compile Include="API\ProductCategoryController.cs" />
@@ -321,6 +322,13 @@
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\order\orders.module.js" />
+    <Content Include="app\components\order\ordersAddController.js" />
+    <Content Include="app\components\order\ordersAddView.html" />
+    <Content Include="app\components\order\ordersEditController.js" />
+    <Content Include="app\components\order\ordersEditView.html" />
+    <Content Include="app\components\order\ordersListController.js" />
+    <Content Include="app\components\order\ordersListView.html" />
     <Content Include="app\components\page\pagesAddView.html" />
     <Content Include="app\components\page\pages.module.js" />
     <Content Include="app\components\page\pagesAddController.js" />
@@ -345,6 +353,13 @@
     <Content Include="app\components\product_categories\productCategoryListView.html" />
     <Content Include="app\components\product_categories\producteCategoryListController.js" />
     <Content Include="app\components\ReadMe.txt" />
+    <Content Include="app\components\slide\slides.module.js" />
+    <Content Include="app\components\slide\slidesAddController.js" />
+    <Content Include="app\components\slide\slidesAddView.html" />
+    <Content Include="app\components\slide\slidesEditController.js" />
+    <Content Include="app\components\slide\slidesEditView.html" />
+    <Content Include="app\components\slide\slidesListController.js" />
+    <Content Include="app\components\slide\slidesListView.html" />
     <Content Include="app\components\statistic\revenueStatisticController.js" />
     <Content Include="app\components\statistic\revenueStatisticView.html" />
     <Content Include="app\Readme.txt" />
@@ -6455,7 +6470,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\orders\" />
     <Folder Include="app\components\roles\" />
     <Folder Include="app\components\users\" />
     <Folder Include="app\shared\footer\" />

@@ -26,6 +26,8 @@ namespace WebAPI.Web.Mappings
                 cfg.CreateMap<Feedback, FeedbackViewModel>();
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>();
                 cfg.CreateMap<Footer, FooterViewModel>();
+                cfg.CreateMap<Slide, SlideViewModel>();
+                cfg.CreateMap<Order, OrderViewModel>();
 
                 cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
                 cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
