@@ -369,7 +369,7 @@ $.extend( $.validator, {
 	},
 
 	messages: {
-        required: "Trường này là bắt buộc.",
+		required: "This field is required.",
 		remote: "Please fix this field.",
 		email: "Please enter a valid email address.",
 		url: "Please enter a valid URL.",
