@@ -23,6 +23,9 @@ namespace WebAPI.Model.Models
         [Required]
         public int GroupID { set; get; }
 
+        [Required]
+        public int ParentID { set; get; }
+
         [ForeignKey("GroupID")]
         //khoá ngoại
         public virtual MenuGroup MenuGroup { set; get; }

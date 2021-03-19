@@ -186,6 +186,18 @@ namespace WebAPI.Web.Infrastructure.Extensions
             appGroup.Name = appGroupViewModel.Name;
         }
 
+        public static void UpdateMenu(this Menu menu, MenuViewModel menuViewModel)
+        {
+            menu.ID = menuViewModel.ID;
+            menu.Name = menuViewModel.Name;
+            menu.URL = menuViewModel.URL;
+            menu.DisplayOrder = menuViewModel.DisplayOrder;
+            menu.GroupID = menuViewModel.GroupID;
+            menu.Target = menuViewModel.Target;
+            menu.ParentID = menuViewModel.ParentID;
+            menu.Status = menuViewModel.Status;
+        }
+
         public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
         {
             if (action == "update")

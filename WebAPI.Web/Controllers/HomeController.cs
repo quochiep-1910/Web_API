@@ -16,13 +16,15 @@ namespace WebAPI.Web.Controllers
         private IProductCategoryService _productCategoryService;
         private ICommonService _commonService;
         private IProductService _productService;
+        private IMenuService _menuService;
 
         public HomeController(IProductCategoryService productCategoryService, ICommonService commonService,
-            IProductService productService)
+            IProductService productService, IMenuService menuService)
         {
             _productCategoryService = productCategoryService;
             _commonService = commonService;
             _productService = productService;
+            _menuService = menuService;
         }
 
         // GET: Home
@@ -63,7 +65,9 @@ namespace WebAPI.Web.Controllers
         [ChildActionOnly]
         public ActionResult Header()
         {
-            return PartialView();
+            var menuModel = _menuService.ListByGroupID(1);
+
+            return PartialView(menuModel);
         }
 
         [ChildActionOnly]

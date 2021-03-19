@@ -113,6 +113,10 @@
     <Compile Include="Migrations\202102260848318_RevenuesStaticSP.designer.cs">
       <DependentUpon>202102260848318_RevenuesStaticSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103181314274_updateMenu.cs" />
+    <Compile Include="Migrations\202103181314274_updateMenu.designer.cs">
+      <DependentUpon>202103181314274_updateMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -195,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102260848318_RevenuesStaticSP.resx">
       <DependentUpon>202102260848318_RevenuesStaticSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103181314274_updateMenu.resx">
+      <DependentUpon>202103181314274_updateMenu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
