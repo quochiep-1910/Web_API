@@ -1,0 +1,96 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhập Menu</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Menu ></li>
+                    <li><a ui-sref="menus"> Danh sách ></a></li>
+                    <li class="active"> Cập nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Cập nhập {{ menus.Name}}</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <!--novalidate là xoá đi thuộc tính mặc định của form-->
+    <form class="form-horizontal" novalidate name="frmUpdatemenus" role="form" ng-submit="Updatemenus()">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Menu</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" ng-change="GetUrl()" required name="name" ng-model="menus.Name">
+                    <span ng-show="frmUpdatemenus.name.$invalid" class="has-error">Phải nhập tên trang.</span>
+                    <span ng-show="frmUpdatemenus.name.$error.maxlength" class="has-error">Tên trang vượt quá 256 kí tự</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" name="Alias" required ng-model="menus.URL">
+                    <span ng-show="frmUpdatemenus.URL.$invalid" class="has-error">phải nhập URL</span>
+                    <span ng-show="frmUpdatemenus.URL.$error.maxlength" class="has-error">URL vượt quá 256 kí tự</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Thứ tự hiện thị</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="DisplayOrder" ng-model="menus.DisplayOrder">
+                    <span ng-show="frmUpdatemenus.DisplayOrder.$invalid" class="has-error">phải nhập Thứ tự hiện thị</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Nhóm hiện thị</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="DisplayOrder" ng-model="menus.GroupID">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Target</label>
+                <div class="col-sm-10">
+                    <select class="form-control" ng-maxlength="10" name="Target" required ng-model="menus.Target" ng-options="x for x in target"></select>
+                    <span ng-show="frmAddmenus.Target.$invalid" class="has-error">phải nhập Target</span>
+                    <span ng-show="frmAddmenus.Target.$error.maxlength" class="has-error">Target vượt quá 10 kí tự</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Menu cha</label>
+                <div class="col-sm-10">
+                    <select class="form-control" required name="parentId" ng-model="menus.ParentID" ng-options="option.ID as option.Name for option in flatFolders">
+
+                        <option value="">-- chọn Menu cha --</option>
+                    </select>
+
+                    <input type="hidden" name="parentId" ng-model="menus.ParentID" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="status"
+                               ng-model="menus.Status" ng-checked="menus.Status">
+                        <label class="form-check-label" for="exampleCheck2">Kích Hoạt</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" ng-disabled="frmUpdatepages.$invalid" class="btn btn-info">Lưu</button>
+            <button ui-sref="menus" class="btn btn-default float-right">quay lại</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>
