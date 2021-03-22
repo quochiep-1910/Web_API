@@ -15,6 +15,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/slide")]
+    [Authorize]
     public class SildeController : ApiControllerBase
     {
         private ISlideService _sildeService;

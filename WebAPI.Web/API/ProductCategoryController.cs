@@ -15,7 +15,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/productcategory")]
-    //[Authorize]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         private IProductCategoryService _productCategoryService;

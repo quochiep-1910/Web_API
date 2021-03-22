@@ -29,6 +29,7 @@ namespace WebAPI.Web.Mappings
                 cfg.CreateMap<Slide, SlideViewModel>();
                 cfg.CreateMap<Order, OrderViewModel>();
                 cfg.CreateMap<Menu, MenuViewModel>();
+                cfg.CreateMap<MenuGroup, MenuGroupViewModel>();
 
                 cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
                 cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();

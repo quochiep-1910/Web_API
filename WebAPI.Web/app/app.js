@@ -9,6 +9,7 @@
             'grocery.pages',
             'grocery.slides',
             'grocery.menus',
+            'grocery.menugroups',
             'grocery.orders',
             'grocery.feedbacks',
             'grocery.footers',

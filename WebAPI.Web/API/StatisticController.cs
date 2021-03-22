@@ -10,6 +10,7 @@ using WebAPI.Web.Infrastructure.Core;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/statistic")]
+    [Authorize]
     public class StatisticController : ApiControllerBase
     {
         private IStatisticService _statisticService;

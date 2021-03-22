@@ -16,6 +16,7 @@ using WebAPI.Web.Models;
 namespace WebAPI.Web.API
 {
     [RoutePrefix("api/order")]
+    [Authorize]
     public class OrderController : ApiControllerBase
     {
         private IOrderService _orderService;

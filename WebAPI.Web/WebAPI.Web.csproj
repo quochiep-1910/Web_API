@@ -226,6 +226,7 @@
     <Compile Include="API\FooterController.cs" />
     <Compile Include="API\HomeController.cs" />
     <Compile Include="API\MenuController.cs" />
+    <Compile Include="API\MenuGroupController.cs" />
     <Compile Include="API\OrderController.cs" />
     <Compile Include="API\PageController.cs" />
     <Compile Include="API\PostCategoryController.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MenuGroupViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -324,6 +326,13 @@
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\menugroup\menugroups.module.js" />
+    <Content Include="app\components\menugroup\menugroupsAddController.js" />
+    <Content Include="app\components\menugroup\menugroupsAddView.html" />
+    <Content Include="app\components\menugroup\menugroupsEditController.js" />
+    <Content Include="app\components\menugroup\menugroupsEditView.html" />
+    <Content Include="app\components\menugroup\menugroupsListController.js" />
+    <Content Include="app\components\menugroup\menugroupsListView.html" />
     <Content Include="app\components\menu\menus.module.js" />
     <Content Include="app\components\menu\menusAddController.js" />
     <Content Include="app\components\menu\menusAddView.html" />

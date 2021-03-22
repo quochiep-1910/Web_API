@@ -63,7 +63,7 @@ namespace WebAPI.Web
         );
             routes.MapRoute(
              name: "home",
-             url: "trang-chu",
+             url: "trang-chu.html",
              defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
        );
             routes.MapRoute(

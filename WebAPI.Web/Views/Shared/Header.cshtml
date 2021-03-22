@@ -49,7 +49,6 @@
 
                             }
                             <li><a href="/gio-hang.html" title="My cart">Giỏ Hàng</a></li>
-                            <li><a href="/lien-he.html" title="Contact">Liên Hệ</a></li>
                         </ul>
                     }
                 </div>
@@ -137,9 +136,11 @@
                                     var child = Model.Where(x => x.ParentID == item.ID);<!--lấy ra danh sách con khi ID cha giống ID con-->
                                     var parentClass = child.Count() > 0;
                                     var itemdropdown = child.Count() > 0;
+
+                                    var url = "/" + item.URL + ".html";
                                     <li>
 
-                                        <a href="/@item.URL" target="@item.Target">@item.Name</a>
+                                        <a href="@url" target="@item.Target">@item.Name</a>
                                         @if (child.Count() > 0)
                                         {
                                             <div class="mega_menu jewelry">
@@ -166,9 +167,10 @@
                                     var child = Model.Where(x => x.ParentID == item.ID);<!--lấy ra danh sách con khi ID cha giống ID con-->
                                     var parentClass = child.Count() > 0;
                                     var itemdropdown = child.Count() > 0;
+                                    var url = "/" + item.URL + ".html";
                                     <li>
 
-                                        <a href="/@item.URL" target="@item.Target">@item.Name</a>
+                                        <a href="@url" target="@item.Target">@item.Name</a>
                                         @if (child.Count() > 0)
                                         {
                                             <div class="mega_menu jewelry">
