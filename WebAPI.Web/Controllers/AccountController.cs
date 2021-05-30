@@ -224,6 +224,41 @@ namespace WebAPI.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel changePasswordVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(changePasswordVM);
+            }
+            if (User.Identity.GetUserId() == null)
+            {
+                ModelState.AddModelError("", "Vui lòng đăng nhập");
+
+                return View(changePasswordVM);
+            }
+
+            var result = await _userManager.ChangePasswordAsync(User.Identity.GetUserId(),
+                changePasswordVM.OldPassword, changePasswordVM.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    ViewData["SuccessMsg"] = "Thay đổi mật khẩu thành công";
+                }
+            }
+            AddErrors(result);
+            return View(changePasswordVM);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOut()

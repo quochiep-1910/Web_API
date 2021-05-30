@@ -37,6 +37,11 @@ namespace WebAPI.Web
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
       );
             routes.MapRoute(
+               name: "ChangePassword",
+               url: "thay-doi-mat-khau.html",
+               defaults: new { controller = "Account", action = "ChangePassword", id = UrlParameter.Optional }
+);
+            routes.MapRoute(
                name: "Register",
                url: "dang-ki.html",
                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }

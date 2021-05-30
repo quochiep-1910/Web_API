@@ -1,0 +1,46 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhập Nhóm menu</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Nhóm menu ></li>
+                    <li><a ui-sref="menugroups"> Danh sách ></a></li>
+                    <li class="active"> Cập nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Cập nhập {{ menugroups.Name}}</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <!--novalidate là xoá đi thuộc tính mặc định của form-->
+    <form class="form-horizontal" novalidate name="frmUpdatemenugroups" role="form" ng-submit="Updatemenugroups()">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tên Nhóm menu</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="256" required name="Name" ng-model="menugroups.Name">
+                    <span ng-show="frmUpdatemenugroups.name.$invalid" class="has-error">Phải nhập tên Nhóm menu.</span>
+                    <span ng-show="frmUpdatemenugroups.name.$error.maxlength" class="has-error">Tên Nhóm menu vượt quá 256 kí tự</span>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" ng-disabled="frmUpdatemenugroups.$invalid" class="btn btn-info">Lưu</button>
+            <button ui-sref="menugroups" class="btn btn-default float-right">quay lại</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>
